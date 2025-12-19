@@ -50,9 +50,7 @@ header {
     color: white;
     padding: 20px 0;
     box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    /* Убрано закрепление: удалены свойства position, top, z-index */
 }
 
 .header-content {
