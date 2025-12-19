@@ -51,28 +51,34 @@ header {
     padding: 20px 0;
     box-shadow: var(--shadow);
     position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .nav-container {
     display: flex;
     align-items: center;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 nav ul {
     display: flex;
     list-style: none;
+    flex-wrap: wrap;
 }
 
 nav ul li {
@@ -84,13 +90,30 @@ nav ul li a {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
+    display: block;
+    padding: 5px 0;
 }
 
 nav ul li a:hover {
     color: #ffcc00;
 }
 
-.cta { color: #09100e; background: white; padding: 8px 12px; border-radius: 10px; opacity: 1; color: #ffcc00; text-decoration: none; font-weight: 600; font-size: 14px; opacity: 0.9; }
+.cta {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    color: #ffcc00;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    opacity: 0.9;
+    white-space: nowrap;
+}
+
+.cta:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
 
 /* Переключатель темы */
 .theme-toggle {
@@ -123,12 +146,7 @@ nav ul li a:hover {
 }
 
 .dark-theme .theme-toggle::before {
-    transform: translateX(30px);
-}
-
-.theme-toggle i {
-    font-size: 14px;
-    z-index: 1;
+    transform: translateX(55px);
 }
 
 .theme-toggle .sun {
@@ -172,6 +190,7 @@ main {
     text-align: center;
     color: white;
     margin-bottom: 30px;
+    padding: 20px;
 }
 
 .hero h1 {
@@ -188,12 +207,6 @@ section {
     padding: 50px 0;
 }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--primary-color);
-}
-
 .card {
     background-color: var(--card-bg);
     border-radius: 8px;
@@ -201,11 +214,14 @@ section {
     padding: 30px;
     margin-bottom: 30px;
     transition: transform 0.3s;
+    border: 1px solid var(--border-color);
 }
 
 .card:hover {
     transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
 }
+
 .card h3 {
     color: var(--primary-color);
     margin-bottom: 20px;
@@ -215,45 +231,102 @@ section {
 
 .company-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
 
 .company-item {
-    background-color: var(--background-color);
-    padding: 15px;
+    background-color: var(--card-bg);
+    padding: 20px;
     border-radius: 6px;
     border-left: 4px solid var(--primary-color);
+    transition: transform 0.3s;
+    border: 1px solid var(--border-color);
+}
+
+.company-item:hover {
+    transform: translateY(-3px);
 }
 
 .company-item h4 {
     color: var(--primary-color);
     margin-bottom: 10px;
+    font-size: 1.1rem;
 }
 
 .company-item p {
-    margin-bottom: 5px;
-    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
+/* Таблица сравнения */
 .comparison-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    overflow-x: auto;
+    display: block;
 }
 
 .comparison-table th, .comparison-table td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 12px;
     text-align: left;
+    min-width: 120px;
 }
 
 .comparison-table th {
     background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
 
+.comparison-table tr:nth-child(even) {
+    background-color: var(--card-bg);
+}
 
-/* Адаптивность */
+.comparison-table tr:hover {
+    background-color: var(--border-color);
+}
+
+/* Футер */
+footer {
+    background: #333;
+    color: white;
+    padding: 30px 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+/* Адаптивность для планшетов и мобильных */
+@media (max-width: 992px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .hero {
+        height: 350px;
+    }
+    
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    section {
+        padding: 40px 0;
+    }
+}
+
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -261,58 +334,185 @@ section {
         gap: 15px;
     }
     
+    .logo {
+        margin-bottom: 0;
+        font-size: 22px;
+    }
+    
     .nav-container {
         flex-direction: column;
         gap: 15px;
+        width: 100%;
     }
     
     nav ul {
-        margin-top: 0;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 10px 15px;
+        width: 100%;
     }
     
     nav ul li {
         margin: 0;
     }
     
-    .news-grid, .events-list {
+    .cta {
+        margin-top: 5px;
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .hero {
+        height: 300px;
+        padding: 15px;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 25px;
+    }
+    
+    .card {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .company-list {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
     
-    .event-card {
-        flex-direction: column;
+    .company-item {
+        padding: 15px;
     }
     
-    .event-date {
-        min-width: 100%;
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-        padding: 10px;
+    .company-item h4 {
+        font-size: 1rem;
     }
     
-    .footer-links {
-        flex-direction: column;
-        gap: 10px;
+    .comparison-table {
+        font-size: 0.9rem;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 8px;
+        min-width: 100px;
+    }
+    
+    .theme-toggle {
+        width: 70px;
+        height: 28px;
+    }
+    
+    .dark-theme .theme-toggle::before {
+        transform: translateX(42px);
     }
 }
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 15px;
+        padding: 0 12px;
     }
     
     .logo {
         font-size: 20px;
     }
     
-    .section-title {
-        font-size: 24px;
+    nav ul {
+        flex-direction: column;
+        gap: 8px;
     }
     
-    .news-content, .event-content {
+    nav ul li a {
+        padding: 8px 0;
+    }
+    
+    .hero {
+        height: 250px;
+    }
+    
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero p {
+        font-size: 0.9rem;
+    }
+    
+    .section-title {
+        font-size: 1.3rem;
+    }
+    
+    .section-title:after {
+        width: 60px;
+        height: 2px;
+    }
+    
+    .card {
         padding: 15px;
+    }
+    
+    .card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    
+    .company-item {
+        padding: 12px;
+    }
+    
+    .comparison-table {
+        font-size: 0.8rem;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 6px;
+        min-width: 80px;
+    }
+    
+    footer {
+        padding: 20px 0;
+    }
+    
+    footer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Особые стили для очень маленьких экранов */
+@media (max-width: 360px) {
+    .logo {
+        font-size: 18px;
+    }
+    
+    .hero h1 {
+        font-size: 1.3rem;
+    }
+    
+    .hero p {
+        font-size: 0.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+    }
+    
+    .card {
+        padding: 12px;
+    }
+    
+    .comparison-table {
+        font-size: 0.75rem;
     }
 }
