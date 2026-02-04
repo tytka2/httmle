@@ -97,20 +97,30 @@ nav ul li a:hover {
 }
 
 .cta {
-    background: white;
+    background: #6A5ACD;
     padding: 8px 12px;
     border-radius: 10px;
-    color: #ffcc00;
+    color: var(--text-color); /* Изменено с #ffcc00 на цвет текста темы */
     text-decoration: none;
     font-weight: 600;
     font-size: 14px;
     opacity: 0.9;
     white-space: nowrap;
+    border: 1px solid var(--border-color); /* Добавлено для лучшей видимости */
 }
 
 .cta:hover {
     opacity: 1;
     transform: translateY(-2px);
+    background-color: var(--primary-light); /* Добавлен hover эффект */
+    color: white; /* Текст становится белым при наведении */
+}
+.cta-dark {
+    color: var(--text-color);
+}
+
+.cta-yellow {
+    color: #ffcc00;
 }
 
 /* Переключатель темы */
@@ -514,3 +524,6 @@ footer p {
         font-size: 0.75rem;
     }
 }
+    
+}
+
