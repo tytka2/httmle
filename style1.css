@@ -90,8 +90,30 @@ nav ul li a:hover {
     color: #ffcc00;
 }
 
-.cta { color: #09100e; background: white; padding: 8px 12px; border-radius: 10px; opacity: 1; color: #ffcc00; text-decoration: none; font-weight: 600; font-size: 14px; opacity: 0.9; }
+.cta { 
+    color: var(--text-color); /* Изменено с #09100e на цвет текста темы */
+    background: #6A5ACD; 
+    padding: 8px 12px; 
+    border-radius: 10px; 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 14px; 
+    opacity: 0.9; 
+    border: 1px solid var(--border-color);
+} 
 
+.cta:hover {
+    opacity: 1;
+    background-color: var(--primary-light);
+    color: white;
+}
+.cta-dark {
+    color: var(--text-color);
+}
+
+.cta-yellow {
+    color: #ffcc00;
+}
 /* Переключатель темы */
 .theme-toggle {
     background: rgba(255, 255, 255, 0.2);
