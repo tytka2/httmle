@@ -4,300 +4,774 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сельское хозяйство Брянской области</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6b8e23">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- CSS стили - ПОДКЛЮЧЕНИЕ СТИЛЕЙ -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Дополнительные стили для карты -->
+    <style>
+        /* Временные стили для карты до загрузки основного CSS */
+        #ecologyMap {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+            z-index: 1;
+        }
+        .leaflet-popup-content {
+            min-width: 200px;
+        }
+        .leaflet-popup-content h4 {
+            color: #6b8e23;
+            margin-bottom: 8px;
+        }
+    </style>
 </head>
 <body class="light-theme">
+    <!-- Шапка сайта -->
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">Сельское хозяйство Брянской области</div>
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    Агро-Брянск
+                </div>
                 <nav>
                     <ul>
-                        <li><a href="#soils">Почвы и агрофирмы</a></li>
-                        <li><a href="#technique">Сельхозтехника</a></li>
-                        <li><a href="#technologies">Агротехнологии</a></li>
-                        <li><a href="#production">Производство</a></li>
-                        <li><a href="#ecology">Экология</a></li>
-                        <li><a href="#comparison">Сравнение</a></li>
+                        <li><a href="#soils"><i class="fas fa-map"></i> Почвы</a></li>
+                        <li><a href="#technique"><i class="fas fa-tractor"></i> Техника</a></li>
+                        <li><a href="#technologies"><i class="fas fa-microchip"></i> Технологии</a></li>
+                        <li><a href="#production"><i class="fas fa-chart-line"></i> Производство</a></li>
+                        <li><a href="#ecology"><i class="fas fa-leaf"></i> Экология</a></li>
+                        <li><a href="#analytics"><i class="fas fa-chart-pie"></i> Аналитика</a></li>
+                        <li><a href="#comparison"><i class="fas fa-balance-scale"></i> Сравнение</a></li>
+                        <li><a href="#forum"><i class="fas fa-comments"></i> Форум</a></li>
+                        <li><a href="#knowledge"><i class="fas fa-book"></i> База знаний</a></li>
                     </ul>
                 </nav>
-		        <a href="bbc.html" class="cta cta-dark">Новости</a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
-                    <span class="sun">☀️</span>
-                    <span class="moon">🌙</span>
-                </button>
+                <div class="header-actions">
+                    <a href="bbc.html" class="cta"><i class="fas fa-newspaper"></i> Новости</a>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                        <span class="sun">☀️</span>
+                        <span class="moon">🌙</span>
+                    </button>
+                    <div class="user-menu" id="userMenu">
+                        <button class="user-btn" onclick="toggleUserMenu()">
+                            <i class="fas fa-user-circle"></i>
+                        </button>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="user-info">
+                                <img src="https://via.placeholder.com/50" alt="Avatar" class="avatar">
+                                <div>
+                                    <h4>Гость</h4>
+                                    <p>Войдите в аккаунт</p>
+                                </div>
+                            </div>
+                            <button onclick="showLoginModal()" class="dropdown-btn">
+                                <i class="fas fa-sign-in-alt"></i> Войти
+                            </button>
+                            <button onclick="showRegisterModal()" class="dropdown-btn">
+                                <i class="fas fa-user-plus"></i> Регистрация
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- Уведомления -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Hero секция -->
     <section class="hero">
         <div class="container">
             <h1>Сельское хозяйство Брянской области</h1>
             <p>Ведущие агропредприятия, современные технологии и экологический подход</p>
-        </div>
-    </section>
-
-    <section id="soils">
-        <div class="container">
-            <h2 class="section-title">Почвы и агрофирмы Брянской области</h2>
-            <div class="card">
-                <h3>Агрофирмы, работающие с различными типами почв</h3>
-                <p>В Брянской области преобладают дерново-подзолистые, серые лесные и торфяно-болотные почвы. Местные агрофирмы успешно работают с каждым типом почв, применяя специальные подходы к обработке и удобрению.</p>
-                
-                <div class="company-list">
-                    <div class="company-item">
-                        <h4>Агрофирма "Брянский Нива"</h4>
-                        <p><strong>Специализация:</strong> Зерновые культуры, картофель</p>
-                        <p><strong>Типы почв:</strong> Дерново-подзолистые</p>
-                        <p><strong>Площадь:</strong> 12 000 га</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ЗАО "Брянская мясная компания"</h4>
-                        <p><strong>Специализация:</strong> Животноводство, кормовые культуры</p>
-                        <p><strong>Типы почв:</strong> Серые лесные</p>
-                        <p><strong>Площадь:</strong> 8 500 га</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ООО "Агрохолдинг Добрунь"</h4>
-                        <p><strong>Специализация:</strong> Овощеводство закрытого грунта</p>
-                        <p><strong>Типы почв:</strong> Торфяно-болотные</p>
-                        <p><strong>Площадь:</strong> 1 200 га</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>СПК "Красный Октябрь"</h4>
-                        <p><strong>Специализация:</strong> Молочное животноводство, зерно</p>
-                        <p><strong>Типы почв:</strong> Дерново-подзолистые</p>
-                        <p><strong>Площадь:</strong> 6 800 га</p>
-                    </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <span class="hero-stat-value">150+</span>
+                    <span class="hero-stat-label">Предприятий</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">500K га</span>
+                    <span class="hero-stat-label">Посевных площадей</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">15%</span>
+                    <span class="hero-stat-label">Рост производства</span>
+                </div>
+                <div class="hero-stat">
+                    <span class="hero-stat-value">25</span>
+                    <span class="hero-stat-label">Эко-проектов</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="technique">
-        <div class="container">
-            <h2 class="section-title">Сельскохозяйственная техника</h2>
-            <div class="card">
-                <h3>Компании, производящие и обслуживающие сельхозтехнику</h3>
-                <p>Предприятия Брянской области обеспечивают местные хозяйства современной техникой и осуществляют ее сервисное обслуживание.</p>
-                
-                <div class="company-list">
-                    <div class="company-item">
-                        <h4>ООО "БрянскАгроМаш"</h4>
-                        <p><strong>Специализация:</strong> Производство тракторов и навесного оборудования</p>
-                        <p><strong>Продукция:</strong> Тракторы Брянец-240, культиваторы, сеялки</p>
-                        <p><strong>Год основания:</strong> 2005</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ЗАО "Агротехсервис"</h4>
-                        <p><strong>Специализация:</strong> Сервисное обслуживание и ремонт техники</p>
-                        <p><strong>Услуги:</strong> Ремонт комбайнов, тракторов, установка GPS-оборудования</p>
-                        <p><strong>Филиалы:</strong> 12 по области</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ООО "Брянский лизинговый центр"</h4>
-                        <p><strong>Специализация:</strong> Лизинг сельхозтехники</p>
-                        <p><strong>Партнеры:</strong> John Deere, CLAAS, Ростсельмаш</p>
-                        <p><strong>Обслужено:</strong> Более 200 хозяйств</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ПК "Агрозапчасть"</h4>
-                        <p><strong>Специализация:</strong> Производство запчастей для сельхозтехники</p>
-                        <p><strong>Продукция:</strong> Диски сеялок, зубья борон, детали плугов</p>
-                        <p><strong>Экспорт:</strong> В 5 стран СНГ</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="technologies">
-        <div class="container">
-            <h2 class="section-title">Агротехнологии</h2>
-            <div class="card">
-                <h3>Компании, внедряющие современные агротехнологии</h3>
-                <p>Предприятия Брянской области активно внедряют инновационные технологии в сельское хозяйство, повышая эффективность и экологичность производства.</p>
-                
-                <div class="company-list">
-                    <div class="company-item">
-                        <h4>ООО "АгроТех Брянск"</h4>
-                        <p><strong>Специализация:</strong> Точное земледелие, GPS-технологии</p>
-                        <p><strong>Технологии:</strong> Системы мониторинга урожая, дроны для опрыскивания</p>
-                        <p><strong>Внедрено в:</strong> 45 хозяйств области</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>НПО "БиоАгро"</h4>
-                        <p><strong>Специализация:</strong> Биотехнологии в растениеводстве</p>
-                        <p><strong>Продукция:</strong> Биопрепараты, энтомофаги, органические удобрения</p>
-                        <p><strong>Лаборатории:</strong> 3 исследовательских центра</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ООО "Тепличный комбинат Брянский"</h4>
-                        <p><strong>Специализация:</strong> Гидропоника, капельное орошение</p>
-                        <p><strong>Технологии:</strong> Климат-контроль, LED-освещение, автоматический полив</p>
-                        <p><strong>Производство:</strong> 5000 т овощей в год</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ЗАО "АгроАналитика"</h4>
-                        <p><strong>Специализация:</strong> Аналитика и прогнозирование в сельском хозяйстве</p>
-                        <p><strong>Услуги:</strong> Анализ почв, прогноз урожайности, рекомендации по удобрениям</p>
-                        <p><strong>Клиенты:</strong> 80% крупных хозяйств области</p>
+    <!-- Основной контент -->
+    <main>
+        <!-- Секция почв и агрофирм -->
+        <section id="soils">
+            <div class="container">
+                <h2 class="section-title">Почвы и агрофирмы</h2>
+                <div class="card">
+                    <h3><i class="fas fa-map-marked-alt"></i> Ведущие агрофирмы</h3>
+                    <p>В Брянской области преобладают дерново-подзолистые, серые лесные и торфяно-болотные почвы. Местные агрофирмы успешно работают с каждым типом почв.</p>
+                    
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>Агрофирма "Брянский Нива"</h4>
+                            <p><i class="fas fa-tag"></i> Зерновые, картофель</p>
+                            <p><i class="fas fa-mountain"></i> Дерново-подзолистые</p>
+                            <p><i class="fas fa-chart-area"></i> 12 000 га</p>
+                            <p><i class="fas fa-star"></i> Рейтинг: 4.5/5</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "Брянская мясная компания"</h4>
+                            <p><i class="fas fa-tag"></i> Животноводство</p>
+                            <p><i class="fas fa-mountain"></i> Серые лесные</p>
+                            <p><i class="fas fa-chart-area"></i> 8 500 га</p>
+                            <p><i class="fas fa-star"></i> Рейтинг: 4.2/5</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Агрохолдинг Добрунь"</h4>
+                            <p><i class="fas fa-tag"></i> Овощеводство</p>
+                            <p><i class="fas fa-mountain"></i> Торфяно-болотные</p>
+                            <p><i class="fas fa-chart-area"></i> 1 200 га</p>
+                            <p><i class="fas fa-star"></i> Рейтинг: 4.8/5</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>СПК "Красный Октябрь"</h4>
+                            <p><i class="fas fa-tag"></i> Молочное животноводство</p>
+                            <p><i class="fas fa-mountain"></i> Дерново-подзолистые</p>
+                            <p><i class="fas fa-chart-area"></i> 6 800 га</p>
+                            <p><i class="fas fa-star"></i> Рейтинг: 4.3/5</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="production">
-        <div class="container">
-            <h2 class="section-title">Производство сельхозпродукции</h2>
-            <div class="card">
-                <h3>Производители сельскохозяйственной продукции</h3>
-                <p>Брянская область славится своими производителями качественной сельскохозяйственной продукции, как растениеводческой, так и животноводческой.</p>
-                
-                <div class="company-list">
-                    <div class="company-item">
-                        <h4>АО "Брянский молочный комбинат"</h4>
-                        <p><strong>Специализация:</strong> Молочная продукция</p>
-                        <p><strong>Продукция:</strong> Молоко, сыры, йогурты, кефир</p>
-                        <p><strong>Объем:</strong> 50 т молока в сутки</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ООО "Брянский картофель"</h4>
-                        <p><strong>Специализация:</strong> Картофель и овощи</p>
-                        <p><strong>Продукция:</strong> Картофель, морковь, лук, капуста</p>
-                        <p><strong>Площади:</strong> 3 500 га</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ЗАО "Брянский свинокомплекс"</h4>
-                        <p><strong>Специализация:</strong> Свиноводство</p>
-                        <p><strong>Продукция:</strong> Свинина мясная, колбасные изделия</p>
-                        <p><strong>Мощность:</strong> 10 000 голов в год</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ООО "Брянская зерновая компания"</h4>
-                        <p><strong>Специализация:</strong> Зерновые и зернобобовые</p>
-                        <p><strong>Продукция:</strong> Пшеница, ячмень, гречиха, горох</p>
-                        <p><strong>Объем:</strong> 25 000 т в год</p>
+        <!-- Секция техники -->
+        <section id="technique">
+            <div class="container">
+                <h2 class="section-title">Сельхозтехника</h2>
+                <div class="card">
+                    <h3><i class="fas fa-tools"></i> Производители и сервис</h3>
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>ООО "БрянскАгроМаш"</h4>
+                            <p><i class="fas fa-cog"></i> Тракторы Брянец-240</p>
+                            <p><i class="fas fa-wrench"></i> Культиваторы, сеялки</p>
+                            <p><i class="fas fa-calendar"></i> С 2005 года</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "Агротехсервис"</h4>
+                            <p><i class="fas fa-wrench"></i> Ремонт и обслуживание</p>
+                            <p><i class="fas fa-map-marker-alt"></i> 12 филиалов</p>
+                            <p><i class="fas fa-gps"></i> Установка GPS</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Брянский лизинговый центр"</h4>
+                            <p><i class="fas fa-handshake"></i> Лизинг техники</p>
+                            <p><i class="fas fa-building"></i> John Deere, CLAAS</p>
+                            <p><i class="fas fa-users"></i> 200+ хозяйств</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ПК "Агрозапчасть"</h4>
+                            <p><i class="fas fa-gear"></i> Производство запчастей</p>
+                            <p><i class="fas fa-globe"></i> Экспорт в 5 стран</p>
+                            <p><i class="fas fa-certificate"></i> ГОСТ Р</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="ecology">
-        <div class="container">
-            <h2 class="section-title">Экологические инициативы и мониторинг</h2>
-            
-            <div class="card">
-                <h3>Компании, внедряющие экологические практики</h3>
-                <p>Сельхозпредприятия Брянской области активно внедряют экологически чистые технологии и участвуют в природоохранных программах.</p>
-                
-                <div class="company-list">
-                    <div class="company-item">
-                        <h4>ООО "ЭкоАгро Брянск"</h4>
-                        <p><strong>Специализация:</strong> Органическое земледелие</p>
-                        <p><strong>Продукция:</strong> Органические овощи, зерно, молоко</p>
-                        <p><strong>Сертификаты:</strong> EU Organic, ГОСТ 33980</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ЗАО "Биоэнергия Брянск"</h4>
-                        <p><strong>Специализация:</strong> Переработка отходов сельского хозяйства</p>
-                        <p><strong>Технологии:</strong> Биогазовые установки, производство удобрений</p>
-                        <p><strong>Мощность:</strong> 5 МВт электроэнергии</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>ООО "АгроЭкология"</h4>
-                        <p><strong>Специализация:</strong> Экологический мониторинг</p>
-                        <p><strong>Услуги:</strong> Анализ почв, воды, воздуха, экологический аудит</p>
-                        <p><strong>Клиенты:</strong> 30 хозяйств области</p>
-                    </div>
-                    <div class="company-item">
-                        <h4>СПК "Зеленый путь"</h4>
-                        <p><strong>Специализация:</strong> Восстановление плодородия почв</p>
-                        <p><strong>Методы:</strong> Сидерация, севооборот, минимальная обработка</p>
-                        <p><strong>Результат:</strong> +15% плодородия за 5 лет</p>
+        <!-- Секция технологий -->
+        <section id="technologies">
+            <div class="container">
+                <h2 class="section-title">Агротехнологии</h2>
+                <div class="card">
+                    <h3><i class="fas fa-rocket"></i> Инновации в сельском хозяйстве</h3>
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>ООО "АгроТех Брянск"</h4>
+                            <p><i class="fas fa-satellite"></i> Точное земледелие</p>
+                            <p><i class="fas fa-drone"></i> Дроны для мониторинга</p>
+                            <p><i class="fas fa-map"></i> 45 хозяйств</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>НПО "БиоАгро"</h4>
+                            <p><i class="fas fa-flask"></i> Биопрепараты</p>
+                            <p><i class="fas fa-seedling"></i> Органические удобрения</p>
+                            <p><i class="fas fa-microscope"></i> 3 лаборатории</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Тепличный комбинат"</h4>
+                            <p><i class="fas fa-water"></i> Гидропоника</p>
+                            <p><i class="fas fa-sun"></i> LED-освещение</p>
+                            <p><i class="fas fa-chart-line"></i> 5000 т/год</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "АгроАналитика"</h4>
+                            <p><i class="fas fa-chart-bar"></i> Анализ почв</p>
+                            <p><i class="fas fa-calculator"></i> Прогноз урожайности</p>
+                            <p><i class="fas fa-check-circle"></i> 80% хозяйств</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Здесь будут добавляться данные из JSON через JavaScript -->
-            <div id="ecology-data-container"></div>
-        </div>
-    </section>
+        </section>
 
-    <section id="comparison">
-        <div class="container">
-            <h2 class="section-title">Сравнительный анализ</h2>
-            <div class="card">
-                <h3>Сравнение предприятий по ключевым показателям</h3>
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Предприятие</th>
-                            <th>Специализация</th>
-                            <th>Площадь, га</th>
-                            <th>Годовой оборот, млн руб</th>
-                            <th>Количество сотрудников</th>
-                            <th>Экологический рейтинг</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Агрофирма "Брянский Нива"</td>
-                            <td>Зерновые, картофель</td>
-                            <td>12 000</td>
-                            <td>850</td>
-                            <td>320</td>
-                            <td>4.2/5</td>
-                        </tr>
-                        <tr>
-                            <td>ЗАО "Брянская мясная компания"</td>
-                            <td>Животноводство</td>
-                            <td>8 500</td>
-                            <td>720</td>
-                            <td>280</td>
-                            <td>3.8/5</td>
-                        </tr>
-                        <tr>
-                            <td>ООО "Агрохолдинг Добрунь"</td>
-                            <td>Овощеводство</td>
-                            <td>1 200</td>
-                            <td>450</td>
-                            <td>150</td>
-                            <td>4.5/5</td>
-                        </tr>
-                        <tr>
-                            <td>ООО "ЭкоАгро Брянск"</td>
-                            <td>Органическое земледелие</td>
-                            <td>2 500</td>
-                            <td>380</td>
-                            <td>95</td>
-                            <td>5.0/5</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- Секция производства -->
+        <section id="production">
+            <div class="container">
+                <h2 class="section-title">Производство</h2>
+                <div class="card">
+                    <h3><i class="fas fa-store"></i> Производители продукции</h3>
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>АО "Брянский молочный комбинат"</h4>
+                            <p><i class="fas fa-glass-cheers"></i> Молоко, сыры, йогурты</p>
+                            <p><i class="fas fa-weight-hanging"></i> 50 т/сутки</p>
+                            <p><i class="fas fa-trophy"></i> Лучший продукт 2025</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Брянский картофель"</h4>
+                            <p><i class="fas fa-carrot"></i> Картофель, овощи</p>
+                            <p><i class="fas fa-chart-area"></i> 3 500 га</p>
+                            <p><i class="fas fa-truck"></i> Свежая продукция</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "Брянский свинокомплекс"</h4>
+                            <p><i class="fas fa-piggy-bank"></i> Свинина</p>
+                            <p><i class="fas fa-weight-hanging"></i> 10 000 голов/год</p>
+                            <p><i class="fas fa-certificate"></i> Халяль</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Брянская зерновая"</h4>
+                            <p><i class="fas fa-wheat-alt"></i> Пшеница, ячмень</p>
+                            <p><i class="fas fa-weight-hanging"></i> 25 000 т/год</p>
+                            <p><i class="fas fa-ship"></i> На экспорт</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция экологии -->
+        <section id="ecology">
+            <div class="container">
+                <h2 class="section-title">Экологический мониторинг</h2>
+                
+                <div class="card">
+                    <h3><i class="fas fa-recycle"></i> Экологические инициативы</h3>
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>ООО "ЭкоАгро Брянск"</h4>
+                            <p><i class="fas fa-leaf"></i> Органическое земледелие</p>
+                            <p><i class="fas fa-certificate"></i> EU Organic</p>
+                            <p><i class="fas fa-check-double"></i> ГОСТ 33980</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "Биоэнергия"</h4>
+                            <p><i class="fas fa-bolt"></i> Биогазовые установки</p>
+                            <p><i class="fas fa-solar-panel"></i> 5 МВт энергии</p>
+                            <p><i class="fas fa-recycle"></i> Переработка отходов</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "АгроЭкология"</h4>
+                            <p><i class="fas fa-microscope"></i> Анализ почв и воды</p>
+                            <p><i class="fas fa-flask"></i> Экологический аудит</p>
+                            <p><i class="fas fa-users"></i> 30 хозяйств</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>СПК "Зеленый путь"</h4>
+                            <p><i class="fas fa-tree"></i> Восстановление почв</p>
+                            <p><i class="fas fa-chart-line"></i> +15% плодородия</p>
+                            <p><i class="fas fa-seedling"></i> Сидерация</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Статистика экологии -->
+                <div class="ecology-stats" id="ecologyStats"></div>
+
+                <!-- Кнопки фильтрации -->
+                <div class="filter-buttons" id="filterButtons">
+                    <button class="filter-btn active" onclick="filterMarkers('all')">Все объекты</button>
+                    <button class="filter-btn" onclick="filterMarkers('clean')">Чистые зоны</button>
+                    <button class="filter-btn" onclick="filterMarkers('dirty')">Зоны риска</button>
+                    <button class="filter-btn" onclick="filterMarkers('user')">Мои метки</button>
+                </div>
+
+                <!-- Панель управления метками -->
+                <div class="marker-controls card">
+                    <div class="marker-control-header">
+                        <h3><i class="fas fa-map-pin"></i> Управление метками</h3>
+                        <div class="marker-actions">
+                            <button onclick="exportMarkers()" class="action-btn" title="Экспорт меток">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <button onclick="importMarkers()" class="action-btn" title="Импорт меток">
+                                <i class="fas fa-upload"></i>
+                            </button>
+                            <button onclick="clearAllMarkers()" class="action-btn danger" title="Очистить все">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="marker-type-selector">
+                        <button class="marker-type-btn active" data-type="clean" onclick="setMarkerType('clean')">
+                            <span>🌿</span> Чистая зона
+                        </button>
+                        <button class="marker-type-btn" data-type="dirty" onclick="setMarkerType('dirty')">
+                            <span>⚠️</span> Загрязнение
+                        </button>
+                        <button class="marker-type-btn" data-type="observation" onclick="setMarkerType('observation')">
+                            <span>🔍</span> Наблюдение
+                        </button>
+                        <button class="marker-type-btn" data-type="problem" onclick="setMarkerType('problem')">
+                            <span>🏭</span> Проблема
+                        </button>
+                    </div>
+                    <p class="marker-instruction">
+                        <i class="fas fa-hand-pointer"></i> Кликните на карту, чтобы добавить метку
+                    </p>
+                </div>
+
+                <!-- Карта -->
+                <div class="map-container">
+                    <div id="ecologyMap"></div>
+                </div>
+
+                <!-- Списки мест -->
+                <div class="places-sections">
+                    <div class="places-section" id="cleanPlacesSection">
+                        <h3 class="section-subtitle">
+                            <i class="fas fa-leaf" style="color: #4CAF50;"></i> 
+                            Чистые зоны (<span id="cleanCount">0</span>)
+                        </h3>
+                        <div class="places-grid" id="cleanPlacesGrid"></div>
+                    </div>
+
+                    <div class="places-section" id="dirtyPlacesSection">
+                        <h3 class="section-subtitle">
+                            <i class="fas fa-exclamation-triangle" style="color: #f44336;"></i> 
+                            Зоны риска (<span id="dirtyCount">0</span>)
+                        </h3>
+                        <div class="places-grid" id="dirtyPlacesGrid"></div>
+                    </div>
+
+                    <div class="places-section" id="userPlacesSection">
+                        <h3 class="section-subtitle">
+                            <i class="fas fa-user" style="color: #2196F3;"></i> 
+                            Мои метки (<span id="userCount">0</span>)
+                        </h3>
+                        <div class="places-grid" id="userPlacesGrid"></div>
+                    </div>
+                </div>
+
+                <!-- Информация о конфигурации -->
+                <div class="config-info" id="configInfo"></div>
+            </div>
+        </section>
+
+        <!-- Секция аналитики -->
+        <section id="analytics">
+            <div class="container">
+                <h2 class="section-title">Аналитика</h2>
+                <div class="analytics-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Динамика производства</h3>
+                        <div class="chart-container">
+                            <canvas id="productionChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-chart-pie"></i> Структура посевных площадей</h3>
+                        <div class="chart-container">
+                            <canvas id="cropsChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-chart-bar"></i> Экологические показатели</h3>
+                        <div class="chart-container">
+                            <canvas id="ecologyChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция сравнения -->
+        <section id="comparison">
+            <div class="container">
+                <h2 class="section-title">Сравнение предприятий</h2>
+                <div class="card">
+                    <h3><i class="fas fa-balance-scale"></i> Ключевые показатели</h3>
+                    <div class="table-responsive">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Предприятие</th>
+                                    <th>Специализация</th>
+                                    <th>Площадь, га</th>
+                                    <th>Оборот, млн ₽</th>
+                                    <th>Сотрудники</th>
+                                    <th>Эко-рейтинг</th>
+                                    <th>Эффективность</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Агрофирма "Брянский Нива"</td>
+                                    <td>Зерновые</td>
+                                    <td>12 000</td>
+                                    <td>850</td>
+                                    <td>320</td>
+                                    <td>4.2/5</td>
+                                    <td>85%</td>
+                                </tr>
+                                <tr>
+                                    <td>ЗАО "Брянская мясная"</td>
+                                    <td>Животноводство</td>
+                                    <td>8 500</td>
+                                    <td>720</td>
+                                    <td>280</td>
+                                    <td>3.8/5</td>
+                                    <td>78%</td>
+                                </tr>
+                                <tr>
+                                    <td>ООО "Агрохолдинг Добрунь"</td>
+                                    <td>Овощеводство</td>
+                                    <td>1 200</td>
+                                    <td>450</td>
+                                    <td>150</td>
+                                    <td>4.5/5</td>
+                                    <td>92%</td>
+                                </tr>
+                                <tr>
+                                    <td>ООО "ЭкоАгро Брянск"</td>
+                                    <td>Органическое</td>
+                                    <td>2 500</td>
+                                    <td>380</td>
+                                    <td>95</td>
+                                    <td>5.0/5</td>
+                                    <td>88%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция форума -->
+        <section id="forum">
+            <div class="container">
+                <h2 class="section-title">Форум агрономов</h2>
+                <div class="forum-grid">
+                    <div class="card">
+                        <h3><i class="fas fa-comments"></i> Последние обсуждения</h3>
+                        <div class="topics-list" id="topicsList">
+                            <!-- Динамическая загрузка -->
+                        </div>
+                        <button class="btn-new-topic" onclick="showNewTopicForm()">
+                            <i class="fas fa-plus"></i> Новая тема
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-users"></i> Активные пользователи</h3>
+                        <div class="active-users" id="activeUsers">
+                            <!-- Динамическая загрузка -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция базы знаний -->
+        <section id="knowledge">
+            <div class="container">
+                <h2 class="section-title">База знаний</h2>
+                <div class="knowledge-grid">
+                    <div class="knowledge-card" onclick="showCropGuide()">
+                        <i class="fas fa-seedling"></i>
+                        <h4>Справочник культур</h4>
+                        <p>50+ культур с описанием</p>
+                    </div>
+                    <div class="knowledge-card" onclick="showFertilizerGuide()">
+                        <i class="fas fa-flask"></i>
+                        <h4>Удобрения</h4>
+                        <p>Нормы и сроки внесения</p>
+                    </div>
+                    <div class="knowledge-card" onclick="showPestGuide()">
+                        <i class="fas fa-bug"></i>
+                        <h4>Вредители</h4>
+                        <p>Методы борьбы</p>
+                    </div>
+                    <div class="knowledge-card" onclick="showDiseaseGuide()">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>Болезни растений</h4>
+                        <p>Диагностика и лечение</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Калькулятор -->
+        <section id="calculator">
+            <div class="container">
+                <h2 class="section-title">Калькулятор рентабельности</h2>
+                <div class="card">
+                    <h3><i class="fas fa-calculator"></i> Рассчитайте прибыль</h3>
+                    <div class="calculator-grid">
+                        <div class="calculator-inputs">
+                            <div class="form-group">
+                                <label>Культура:</label>
+                                <select id="cropSelect" class="form-control">
+                                    <option value="wheat">Пшеница</option>
+                                    <option value="barley">Ячмень</option>
+                                    <option value="corn">Кукуруза</option>
+                                    <option value="sunflower">Подсолнечник</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Площадь (га):</label>
+                                <input type="number" id="areaInput" class="form-control" value="100">
+                            </div>
+                            <div class="form-group">
+                                <label>Затраты (₽/га):</label>
+                                <input type="number" id="costsInput" class="form-control" value="30000">
+                            </div>
+                            <button onclick="calculateProfit()" class="btn-calculate">
+                                <i class="fas fa-calculator"></i> Рассчитать
+                            </button>
+                        </div>
+                        <div class="calculator-result" id="calculatorResult">
+                            <h4>Результаты</h4>
+                            <div class="result-item">
+                                <span>Доход:</span>
+                                <span class="result-value" id="incomeResult">0 ₽</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Затраты:</span>
+                                <span class="result-value" id="totalCostsResult">0 ₽</span>
+                            </div>
+                            <div class="result-item highlight">
+                                <span>Прибыль:</span>
+                                <span class="result-value" id="profitResult">0 ₽</span>
+                            </div>
+                            <div class="result-item highlight">
+                                <span>Рентабельность:</span>
+                                <span class="result-value" id="profitabilityResult">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Рыночные цены -->
+        <section id="prices">
+            <div class="container">
+                <h2 class="section-title">Рыночные цены</h2>
+                <div class="card">
+                    <h3><i class="fas fa-chart-line"></i> Актуальные цены</h3>
+                    <div class="table-responsive">
+                        <table class="prices-table" id="pricesTable">
+                            <thead>
+                                <tr>
+                                    <th>Продукт</th>
+                                    <th>Цена за кг</th>
+                                    <th>Изменение</th>
+                                    <th>Прогноз</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pricesTableBody">
+                                <!-- Динамическая загрузка -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Календарь работ -->
+        <section id="workCalendar">
+            <div class="container">
+                <h2 class="section-title">Календарь работ</h2>
+                <div class="card">
+                    <h3><i class="fas fa-calendar-alt"></i> Март 2026</h3>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Динамическая загрузка -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Достижения -->
+        <section id="achievements">
+            <div class="container">
+                <h2 class="section-title">Мои достижения</h2>
+                <div class="achievements-grid" id="achievementsGrid">
+                    <!-- Динамическая загрузка -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Чат-бот -->
+    <div class="chat-bot" id="chatBot">
+        <div class="chat-header" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span>Агро-помощник</span>
+            <i class="fas fa-chevron-up" id="chatToggleIcon"></i>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-content">
+                        Здравствуйте! Я помогу вам с вопросами о сельском хозяйстве.
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Введите сообщение..." onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
-    </section>
+    </div>
 
+    <!-- Кнопка наверх -->
+    <button class="scroll-top" onclick="scrollToTop()" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Модальные окна -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Вход в аккаунт</h2>
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Пароль:</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-primary">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>Регистрация</h2>
+            <form onsubmit="register(event)">
+                <div class="form-group">
+                    <label>Имя:</label>
+                    <input type="text" id="registerName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="registerEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Пароль:</label>
+                    <input type="password" id="registerPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Подтверждение:</label>
+                    <input type="password" id="registerConfirm" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-primary">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Подвал -->
     <footer>
         <div class="container">
-            <p>© 2025 Сельское хозяйство Брянской области. Все права защищены.</p>
-            <p>сайт создал Мартышев Ярослав</p>
-            <p>информация взята с источников ниже</p>
-            <p>https://bryansk.gks.ru</p>
-            <p>https://www.mcx32.ru</p>
-            <p>https://agro.bryanskobl.ru</p>
-            <p>https://www.bgau.ru</p>
-            <p>Agroxxi.ru</p>
-            <p>eLibrary.ru</p>
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4><i class="fas fa-seedling"></i> Агро-Брянск</h4>
+                    <p>Информационный портал о сельском хозяйстве Брянской области.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-odnoklassniki"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Разделы</h4>
+                    <ul>
+                        <li><a href="#soils">Почвы</a></li>
+                        <li><a href="#technique">Техника</a></li>
+                        <li><a href="#technologies">Технологии</a></li>
+                        <li><a href="#production">Производство</a></li>
+                        <li><a href="#ecology">Экология</a></li>
+                        <li><a href="#analytics">Аналитика</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Инструменты</h4>
+                    <ul>
+                        <li><a href="#calculator">Калькулятор</a></li>
+                        <li><a href="#prices">Рыночные цены</a></li>
+                        <li><a href="#workCalendar">Календарь</a></li>
+                        <li><a href="#knowledge">База знаний</a></li>
+                        <li><a href="#forum">Форум</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p><i class="fas fa-envelope"></i> info@agrobryansk.ru</p>
+                    <p><i class="fas fa-phone"></i> +7 (4832) 00-00-00</p>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Брянск</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 Сельское хозяйство Брянской области</p>
+                <p class="sources">
+                    Источники: 
+                    <a href="https://bryansk.gks.ru" target="_blank">Брянскстат</a> |
+                    <a href="https://www.mcx32.ru" target="_blank">Минсельхоз</a> |
+                    <a href="https://agro.bryanskobl.ru" target="_blank">Департамент АПК</a>
+                </p>
+            </div>
         </div>
     </footer>
 
+    <!-- Скрипты -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+
 
