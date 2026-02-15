@@ -1,0 +1,21 @@
+{
+  "name": "Новости и мероприятия",
+  "short_name": "Новости",
+  "description": "Актуальные новости и мероприятия",
+  "start_url": "/bbc.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6b8e23",
+  "icons": [
+    {
+      "src": "https://via.placeholder.com/192x192/6b8e23/ffffff?text=News",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://via.placeholder.com/512x512/6b8e23/ffffff?text=News",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
