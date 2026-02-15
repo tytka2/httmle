@@ -1362,10 +1362,9 @@ section {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: calc(100% - 40px);
-    max-width: 320px;
+    width: 350px;
     background: var(--card-bg);
-    border-radius: 12px;
+    border-radius: 15px;
     box-shadow: var(--hover-shadow);
     border: 1px solid var(--border-color);
     z-index: 999;
@@ -1376,17 +1375,16 @@ section {
 .chat-header {
     background: var(--primary-color);
     color: white;
-    padding: 12px;
+    padding: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-weight: 600;
-    font-size: clamp(14px, 2vw, 16px);
 }
 
 .chat-header i:first-child {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .chat-header i:last-child {
@@ -1395,7 +1393,7 @@ section {
 }
 
 .chat-body {
-    max-height: 350px;
+    max-height: 400px;
     overflow: hidden;
     transition: max-height 0.3s;
 }
@@ -1405,13 +1403,13 @@ section {
 }
 
 .chat-messages {
-    height: 250px;
+    height: 300px;
     overflow-y: auto;
-    padding: 12px;
+    padding: 15px;
 }
 
 .message {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     display: flex;
 }
 
@@ -1424,41 +1422,39 @@ section {
 }
 
 .message-content {
-    max-width: 85%;
-    padding: 8px 12px;
-    border-radius: 12px;
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 15px;
     background: var(--bg-color);
     border: 1px solid var(--border-color);
-    font-size: clamp(13px, 2vw, 14px);
-    word-wrap: break-word;
+    font-size: 14px;
 }
 
 .message.user .message-content {
     background: var(--primary-color);
     color: white;
-    border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 5px;
 }
 
 .message.bot .message-content {
     background: var(--card-bg);
-    border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 5px;
 }
 
 .chat-input {
     display: flex;
-    padding: 8px;
+    padding: 10px;
     border-top: 1px solid var(--border-color);
 }
 
 .chat-input input {
     flex: 1;
-    padding: 8px;
+    padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 5px 0 0 5px;
     background: var(--bg-color);
     color: var(--text-color);
-    font-size: clamp(13px, 2vw, 14px);
-    min-width: 0;
+    font-size: 14px;
 }
 
 .chat-input input:focus {
@@ -1467,19 +1463,114 @@ section {
 }
 
 .chat-input button {
-    padding: 8px 12px;
+    padding: 10px 15px;
     background: var(--primary-color);
     color: white;
     border: none;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     transition: background 0.3s;
-    flex-shrink: 0;
 }
 
 .chat-input button:hover {
     background: var(--primary-dark);
 }
+
+/* Мобильная версия чат-бота - УЖЕ И КОМПАКТНЕЕ */
+@media (max-width: 768px) {
+    .chat-bot {
+        width: 280px; /* Уменьшенная ширина */
+        right: 15px;
+        bottom: 15px;
+        border-radius: 12px;
+    }
+    
+    .chat-header {
+        padding: 12px;
+        gap: 8px;
+    }
+    
+    .chat-header i:first-child {
+        font-size: 18px;
+    }
+    
+    .chat-messages {
+        height: 250px;
+        padding: 12px;
+    }
+    
+    .message-content {
+        max-width: 85%;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .chat-input {
+        padding: 8px;
+    }
+    
+    .chat-input input {
+        padding: 8px;
+        font-size: 13px;
+    }
+    
+    .chat-input button {
+        padding: 8px 12px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .chat-bot {
+        width: 260px; /* Еще уже для маленьких телефонов */
+        right: 10px;
+        bottom: 10px;
+        border-radius: 10px;
+    }
+    
+    .chat-header {
+        padding: 10px;
+    }
+    
+    .chat-header i:first-child {
+        font-size: 16px;
+    }
+    
+    .chat-messages {
+        height: 220px;
+        padding: 10px;
+    }
+    
+    .message-content {
+        max-width: 90%;
+        padding: 7px 10px;
+        font-size: 12px;
+    }
+    
+    .chat-input {
+        padding: 6px;
+    }
+    
+    .chat-input input {
+        padding: 7px;
+        font-size: 12px;
+    }
+    
+    .chat-input button {
+        padding: 7px 10px;
+    }
+}
+
+/* Альтернативный вариант: если нужно сделать чат на всю ширину с отступами */
+@media (max-width: 360px) {
+    .chat-bot {
+        width: calc(100% - 20px); /* На всю ширину с отступами */
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
 
 /* Кнопка наверх */
 .scroll-top {
@@ -1843,3 +1934,4 @@ footer {
         align-self: flex-end;
     }
 }
+
