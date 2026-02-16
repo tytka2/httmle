@@ -42,8 +42,7 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     scroll-behavior: smooth;
-    padding-top: var(--header-height);
-    min-height: 100vh;
+    padding-top: var(--header-height); /* Отступ для фиксированной шапки */
 }
 
 .container {
@@ -53,128 +52,13 @@ body {
     width: 100%;
 }
 
-/* ========== ПРОГРЕСС-БАР ЗАГРУЗКИ ========== */
-.progress-bar-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: var(--hover-shadow);
-    z-index: 10000;
-    min-width: 300px;
-    text-align: center;
-    border: 1px solid var(--border-color);
-}
-
-.progress-message {
-    margin-bottom: 15px;
-    font-size: 16px;
-    color: var(--primary-color);
-}
-
-.progress-track {
-    width: 100%;
-    height: 8px;
-    background: var(--border-color);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background: var(--primary-color);
-    transition: width 0.3s ease;
-    border-radius: 4px;
-}
-
-/* ========== УЛУЧШЕННЫЕ УВЕДОМЛЕНИЯ ========== */
-.notification-container {
-    position: fixed;
-    top: calc(var(--header-height) + 10px);
-    right: 20px;
-    z-index: 9999;
-    max-width: 350px;
-    width: calc(100% - 40px);
-}
-
-.notification {
-    background: var(--card-bg);
-    border-left: 4px solid var(--primary-color);
-    border-radius: 8px;
-    padding: 12px 15px;
-    margin-bottom: 10px;
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    animation: slideIn 0.3s ease;
-    backdrop-filter: blur(5px);
-    font-size: 14px;
-    position: relative;
-    padding-right: 40px;
-}
-
-.notification-close {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: var(--text-color);
-    opacity: 0.5;
-    transition: opacity 0.3s;
-}
-
-.notification-close:hover {
-    opacity: 1;
-}
-
-.notification.success {
-    border-left-color: var(--success);
-}
-
-.notification.warning {
-    border-left-color: var(--warning);
-}
-
-.notification.error {
-    border-left-color: var(--danger);
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOut {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-
 /* ========== ФИКСИРОВАННАЯ ШАПКА ========== */
 header {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     color: white;
     padding: 10px 0;
     box-shadow: var(--shadow);
-    position: fixed;
+    position: fixed; /* Фиксируем шапку */
     top: 0;
     left: 0;
     right: 0;
@@ -196,7 +80,7 @@ header {
 }
 
 .logo {
-    font-size: clamp(20px, 4vw, 28px);
+    font-size: clamp(20px, 4vw, 28px); /* Адаптивный размер текста */
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -432,6 +316,54 @@ nav ul li a i {
     transform: translateX(5px);
 }
 
+/* Уведомления */
+.notification-container {
+    position: fixed;
+    top: calc(var(--header-height) + 10px);
+    right: 20px;
+    z-index: 9999;
+    max-width: 350px;
+    width: calc(100% - 40px);
+}
+
+.notification {
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease;
+    backdrop-filter: blur(5px);
+    font-size: 14px;
+}
+
+.notification.success {
+    border-left-color: var(--success);
+}
+
+.notification.warning {
+    border-left-color: var(--warning);
+}
+
+.notification.error {
+    border-left-color: var(--danger);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 /* Hero секция */
 .hero {
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
@@ -593,7 +525,6 @@ section {
     border-left: 4px solid var(--primary-color);
     border: 1px solid var(--border-color);
     transition: all 0.3s;
-    cursor: pointer;
 }
 
 .company-item:hover {
@@ -622,590 +553,618 @@ section {
     flex-shrink: 0;
 }
 
-.btn-add-company {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.3s;
-}
-
-.btn-add-company:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-/* ========== СТИЛИ ДЛЯ ПОГОДЫ ========== */
-.weather-section {
-    margin-bottom: 30px;
-}
-
-.weather-grid {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.weather-current {
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.weather-icon-large {
-    font-size: 64px;
-    margin-bottom: 10px;
-}
-
-.weather-temp-large {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.weather-condition {
-    font-size: 18px;
-    margin-bottom: 15px;
-    opacity: 0.9;
-}
-
-.weather-details {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    font-size: 14px;
-}
-
-.weather-details span {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.weather-forecast {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-}
-
-.weather-day {
-    background: var(--bg-color);
-    padding: 15px 5px;
-    border-radius: 8px;
-    text-align: center;
-    border: 1px solid var(--border-color);
-}
-
-.day-name {
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 8px;
-}
-
-.day-icon {
-    font-size: 24px;
-    margin-bottom: 8px;
-}
-
-.day-temp {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.day-precip {
-    font-size: 12px;
-    opacity: 0.7;
-}
-
-.agro-indicators {
-    margin-top: 20px;
-    padding: 15px;
-    background: var(--bg-color);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-}
-
-.indicators-grid {
+/* Экологические стили */
+.ecology-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 15px;
-    margin-top: 10px;
+    margin: 20px 0;
 }
 
-.indicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
+.stat-card {
     background: var(--card-bg);
-    border-radius: 6px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s;
 }
 
-.indicator span {
-    font-size: 12px;
+.stat-card:hover {
+    transform: scale(1.05);
+}
+
+.stat-card h4 {
+    color: var(--text-color);
+    margin-bottom: 8px;
     opacity: 0.8;
-    margin-bottom: 5px;
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
-.indicator strong {
-    font-size: 18px;
+.stat-number {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: bold;
     color: var(--primary-color);
 }
 
-.indicator strong.safe {
-    color: var(--success);
-}
-
-.indicator strong.warning {
-    color: var(--warning);
-}
-
-.field-work-recommendations {
-    margin-top: 20px;
-    padding: 15px;
-    background: var(--bg-color);
-    border-radius: 8px;
-    border-left: 4px solid var(--primary-color);
-}
-
-.field-work-recommendations ul {
-    list-style: none;
-    margin-top: 10px;
-}
-
-.field-work-recommendations li {
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--border-color);
+/* Фильтры */
+.filter-buttons {
     display: flex;
-    align-items: center;
     gap: 8px;
-}
-
-.field-work-recommendations li:last-child {
-    border-bottom: none;
-}
-
-/* ========== СТИЛИ ДЛЯ МАРКЕТПЛЕЙСА ========== */
-.marketplace-categories {
-    display: flex;
-    gap: 10px;
     justify-content: center;
-    margin-bottom: 20px;
+    margin: 20px 0;
     flex-wrap: wrap;
 }
 
-.category-btn {
+.filter-btn {
     padding: 8px 16px;
     border: 2px solid var(--primary-color);
     background: transparent;
     color: var(--primary-color);
     border-radius: 25px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: clamp(14px, 2vw, 16px);
     font-weight: 600;
     transition: all 0.3s;
+    white-space: nowrap;
 }
 
-.category-btn:hover,
-.category-btn.active {
+.filter-btn:hover,
+.filter-btn.active {
     background: var(--primary-color);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
 }
 
-.marketplace-filters {
+/* Управление метками */
+.marker-controls {
+    margin: 20px 0;
+}
+
+.marker-control-header {
     display: flex;
+    flex-direction: column;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
+}
+
+@media (min-width: 768px) {
+    .marker-control-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.marker-actions {
+    display: flex;
+    gap: 8px;
     flex-wrap: wrap;
 }
 
-.marketplace-filters .form-control {
-    flex: 1;
-    min-width: 200px;
+.action-btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
 }
 
-.marketplace-grid {
+.action-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.action-btn.danger:hover {
+    background: var(--danger);
+}
+
+.marker-type-selector {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.marker-type-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: clamp(12px, 2vw, 14px);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.marker-type-btn span {
+    font-size: 16px;
+}
+
+.marker-type-btn:hover {
+    background: var(--primary-light);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.marker-type-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-dark);
+    box-shadow: 0 2px 10px rgba(107, 142, 35, 0.3);
+}
+
+.marker-instruction {
+    text-align: center;
+    padding: 12px;
+    background: var(--bg-color);
+    border-radius: 8px;
+    border: 1px dashed var(--border-color);
+    color: var(--text-color);
+    opacity: 0.8;
+    font-size: clamp(14px, 2vw, 16px);
+}
+
+/* Карта */
+.map-container {
+    margin: 20px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    height: 400px;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .map-container {
+        height: 500px;
+    }
+}
+
+#ecologyMap {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+/* Маркеры на карте */
+.custom-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    transition: transform 0.2s;
+}
+
+.custom-marker:hover {
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Popup карты */
+.leaflet-popup-content {
+    min-width: 180px;
+    max-width: 250px;
+}
+
+.leaflet-popup-content h4 {
+    color: var(--primary-color);
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.leaflet-popup-content p {
+    margin-bottom: 4px;
+    font-size: 11px;
+}
+
+.popup-btn {
+    width: 100%;
+    padding: 6px;
+    margin-top: 6px;
+    background: var(--danger);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: opacity 0.3s;
+}
+
+.popup-btn:hover {
+    opacity: 0.9;
+}
+
+/* Секции мест */
+.places-sections {
+    margin-top: 30px;
+}
+
+.places-section {
     margin-bottom: 30px;
 }
 
-.marketplace-card {
-    background: var(--card-bg);
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    transition: all 0.3s;
-    cursor: pointer;
+.section-subtitle {
+    color: var(--text-color);
+    margin-bottom: 15px;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
-.marketplace-card:hover {
+.places-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.place-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.place-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--hover-shadow);
 }
 
-.marketplace-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.marketplace-content {
-    padding: 15px;
-}
-
-.marketplace-category {
-    display: inline-block;
-    padding: 3px 8px;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 4px;
-    font-size: 11px;
-    margin-bottom: 10px;
-}
-
-.marketplace-card h4 {
-    font-size: 16px;
-    margin-bottom: 8px;
+.place-card h4 {
     color: var(--primary-color);
-    line-height: 1.4;
+    margin-bottom: 10px;
+    padding-right: 25px;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    word-wrap: break-word;
 }
 
-.marketplace-price {
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--success);
-    margin-bottom: 8px;
-}
-
-.marketplace-seller,
-.marketplace-date {
-    font-size: 13px;
-    opacity: 0.7;
-    margin-bottom: 5px;
+.place-card p {
+    margin-bottom: 6px;
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
     display: flex;
     align-items: center;
-    gap: 5px;
-}
-
-.btn-contact {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-contact:hover {
-    background: var(--primary-dark);
-}
-
-.btn-add-product {
-    width: 100%;
-    padding: 15px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.3s;
-}
-
-.btn-add-product:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-/* ========== СТИЛИ ДЛЯ КООПЕРАЦИИ ========== */
-.cooperation-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 6px;
     flex-wrap: wrap;
 }
 
-.tab-btn {
-    padding: 10px 20px;
-    background: transparent;
-    border: 2px solid var(--primary-color);
+.place-card i {
+    width: 18px;
     color: var(--primary-color);
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s;
-    flex: 1;
-    min-width: 120px;
+    flex-shrink: 0;
 }
 
-.tab-btn:hover,
-.tab-btn.active {
-    background: var(--primary-color);
+.place-card.clean {
+    border-left: 4px solid var(--success);
+}
+
+.place-card.dirty {
+    border-left: 4px solid var(--danger);
+}
+
+.place-card.observation {
+    border-left: 4px solid var(--info);
+}
+
+.place-card.problem {
+    border-left: 4px solid var(--warning);
+}
+
+.place-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: bold;
     color: white;
 }
 
-.coop-card {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 15px;
-    transition: all 0.3s;
+.place-badge.clean {
+    background: var(--success);
 }
 
-.coop-card:hover {
-    transform: translateX(5px);
-    box-shadow: var(--shadow);
+.place-badge.dirty {
+    background: var(--danger);
 }
 
-.coop-card h4 {
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    font-size: 18px;
+.place-badge.observation {
+    background: var(--info);
 }
 
-.coop-details {
-    margin: 15px 0;
-    padding: 10px;
-    background: var(--bg-color);
-    border-radius: 6px;
+.place-badge.problem {
+    background: var(--warning);
 }
 
-.coop-details p {
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-}
-
-.btn-join-coop {
-    padding: 8px 16px;
-    background: var(--primary-color);
-    color: white;
+.view-on-map,
+.delete-btn {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    font-size: clamp(12px, 2vw, 14px);
 }
 
-.btn-join-coop:hover {
+.view-on-map {
+    background: var(--primary-color);
+    color: white;
+}
+
+.view-on-map:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
 }
 
-.btn-add-coop {
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
-    background: var(--primary-color);
+.delete-btn {
+    background: var(--danger);
     color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.3s;
 }
 
-.btn-add-coop:hover {
-    background: var(--primary-dark);
+.delete-btn:hover {
+    opacity: 0.9;
 }
 
-/* ========== СТИЛИ ДЛЯ РАСПОЗНАВАНИЯ БОЛЕЗНЕЙ ========== */
-.recognition-card {
+.no-markers {
     text-align: center;
-}
-
-.recognition-upload {
-    padding: 40px;
-    border: 2px dashed var(--border-color);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.recognition-upload:hover {
-    border-color: var(--primary-color);
-    background: rgba(107, 142, 35, 0.05);
-}
-
-.recognition-upload i {
-    font-size: 48px;
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-.recognition-upload p {
-    margin-bottom: 15px;
+    padding: 30px;
     color: var(--text-color);
-}
-
-.btn-upload {
-    padding: 10px 20px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-upload:hover {
-    background: var(--primary-dark);
-}
-
-.recognition-result {
-    margin-top: 20px;
-    padding: 20px;
-    background: var(--bg-color);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    text-align: left;
-}
-
-.diagnosis-card {
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-.diagnosis-card.high {
-    border-left: 4px solid var(--danger);
-    background: rgba(244, 67, 54, 0.05);
-}
-
-.diagnosis-card.medium {
-    border-left: 4px solid var(--warning);
-    background: rgba(255, 152, 0, 0.05);
-}
-
-.diagnosis-name {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 5px;
-}
-
-.diagnosis-probability {
-    font-size: 14px;
-    margin-bottom: 15px;
-    opacity: 0.8;
-}
-
-.btn-save-diagnosis {
-    padding: 8px 16px;
-    margin-top: 15px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-save-diagnosis:hover {
-    background: var(--primary-dark);
-}
-
-.recognition-history {
-    margin-top: 25px;
-    text-align: left;
-}
-
-.recognition-history h4 {
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-.history-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    background: var(--bg-color);
-    border-radius: 6px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-    border: 1px solid var(--border-color);
-}
-
-.history-item:hover {
-    transform: translateX(5px);
-    border-color: var(--primary-color);
-}
-
-.history-thumb {
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    object-fit: cover;
-}
-
-.history-info {
-    flex: 1;
-}
-
-.history-info strong {
-    display: block;
-    color: var(--primary-color);
-    font-size: 14px;
-}
-
-.history-info small {
-    font-size: 11px;
-    opacity: 0.7;
-}
-
-.no-history {
-    text-align: center;
-    padding: 20px;
     opacity: 0.5;
     font-style: italic;
 }
 
-/* ========== СТИЛИ ДЛЯ КАЛЬКУЛЯТОРОВ ========== */
-.calculators-grid {
+/* Конфигурация */
+.config-info {
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    opacity: 0.8;
+    word-wrap: break-word;
+}
+
+/* Аналитика */
+.analytics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
-.calculator-inputs {
-    margin-bottom: 20px;
+@media (min-width: 992px) {
+    .analytics-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+/* Таблицы */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 8px;
+    margin: 0 -1px;
+}
+
+.comparison-table,
+.prices-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    min-width: 600px;
+}
+
+.comparison-table th,
+.comparison-table td,
+.prices-table th,
+.prices-table td {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    font-size: clamp(12px, 2vw, 14px);
+}
+
+.comparison-table th,
+.prices-table th {
+    background: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.comparison-table tr:nth-child(even),
+.prices-table tr:nth-child(even) {
+    background: var(--card-bg);
+}
+
+.price-up {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.price-down {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+/* Форум */
+.forum-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .forum-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.topics-list {
+    max-height: 350px;
+    overflow-y: auto;
+    border-radius: 6px;
+}
+
+.topic-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 6px;
+}
+
+.topic-item:hover {
+    background: var(--bg-color);
+    transform: translateX(5px);
+}
+
+.topic-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--primary-color);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    word-wrap: break-word;
+}
+
+.topic-meta {
+    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+    opacity: 0.7;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-new-topic {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s;
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 600;
+}
+
+.btn-new-topic:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.active-users {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-item {
+    padding: 8px;
+    background: var(--bg-color);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border-color);
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+}
+
+.user-item i {
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+/* База знаний */
+.knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.knowledge-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.knowledge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+    background: var(--primary-color);
+    color: white;
+}
+
+.knowledge-card i {
+    font-size: clamp(30px, 5vw, 40px);
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.knowledge-card:hover i {
+    color: white;
+}
+
+.knowledge-card h4 {
+    margin-bottom: 8px;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.knowledge-card p {
+    opacity: 0.8;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+}
+
+/* Калькулятор */
+.calculator-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .calculator-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 .form-group {
@@ -1293,1283 +1252,109 @@ section {
     white-space: nowrap;
 }
 
-/* ========== СТИЛИ ДЛЯ СРАВНЕНИЯ ========== */
-.comparison-selector {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.comparison-selector .form-control {
-    flex: 1;
-    min-width: 150px;
-}
-
-.btn-compare {
-    padding: 10px 20px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s;
-    white-space: nowrap;
-}
-
-.btn-compare:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
-.comparison-result {
-    padding: 20px;
-    background: var(--bg-color);
-    border-radius: 8px;
-}
-
-.comparison-result h4 {
-    color: var(--primary-color);
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-}
-
-.comparison-table th,
-.comparison-table td {
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    text-align: left;
-}
-
-.comparison-table th {
-    background: var(--primary-color);
-    color: white;
-    font-weight: 600;
-}
-
-.comparison-table td.positive {
-    color: var(--success);
-    font-weight: 600;
-}
-
-.comparison-table td.negative {
-    color: var(--danger);
-    font-weight: 600;
-}
-
-.recommendation {
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(76, 175, 80, 0.1);
-    border-radius: 6px;
-    border-left: 4px solid var(--success);
-    font-weight: 500;
-}
-
-/* ========== СТИЛИ ДЛЯ ПОИСКА ========== */
-.knowledge-search {
-    display: flex;
-    gap: 10px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-
-.knowledge-search .form-control {
-    flex: 1;
-    min-width: 200px;
-}
-
-.btn-search {
-    padding: 10px 20px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
-    white-space: nowrap;
-}
-
-.btn-search:hover {
-    background: var(--primary-dark);
-}
-
-.popular-articles {
-    margin-top: 30px;
-}
-
-.popular-articles h3 {
-    color: var(--primary-color);
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.articles-list {
+/* Календарь */
+.calendar-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
 }
 
-.search-result {
+.calendar-item {
     padding: 12px;
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
     border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.search-result:hover {
-    transform: translateX(5px);
-    border-color: var(--primary-color);
-}
-
-.search-result strong {
-    color: var(--primary-color);
-}
-
-.search-result span {
-    font-size: 12px;
-    opacity: 0.7;
-}
-
-/* ========== СТИЛИ ДЛЯ ДОСТИЖЕНИЙ ========== */
-.achievements-stats {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    padding: 15px;
-    background: var(--card-bg);
-    border-radius: 8px;
+    background: var(--bg-color);
+    border-left: 4px solid;
+    transition: transform 0.3s;
     border: 1px solid var(--border-color);
-    flex-wrap: wrap;
-    gap: 15px;
 }
 
-.achievement-progress {
-    flex: 1;
-    min-width: 200px;
-    position: relative;
-    height: 20px;
-    background: var(--border-color);
-    border-radius: 10px;
-    overflow: hidden;
+.calendar-item:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
 }
 
-.achievement-progress .progress-bar {
-    height: 100%;
-    background: var(--primary-color);
-    transition: width 0.3s;
+.calendar-item.spring {
+    border-left-color: var(--success);
 }
 
-.achievement-progress span {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+.calendar-item.summer {
+    border-left-color: var(--warning);
 }
 
-.achievement-points {
-    font-size: 18px;
-    font-weight: bold;
+.calendar-item.autumn {
+    border-left-color: var(--danger);
+}
+
+.calendar-item.winter {
+    border-left-color: var(--info);
+}
+
+.calendar-item strong {
+    display: block;
+    margin-bottom: 4px;
     color: var(--primary-color);
-    white-space: nowrap;
+    font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
-.achievement-points i {
-    margin-right: 5px;
-    color: gold;
+.calendar-item p {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
 }
 
+/* Достижения */
 .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
 }
 
 .achievement-card {
     background: var(--card-bg);
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 8px;
+    padding: 15px;
     text-align: center;
     border: 1px solid var(--border-color);
-    transition: all 0.3s;
+    transition: transform 0.3s;
     position: relative;
+    overflow: hidden;
 }
 
 .achievement-card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.05);
     box-shadow: var(--hover-shadow);
+}
+
+.achievement-card i {
+    font-size: clamp(30px, 4vw, 40px);
+    color: gold;
+    margin-bottom: 8px;
+}
+
+.achievement-card.locked i {
+    color: #999;
 }
 
 .achievement-card.locked {
     opacity: 0.6;
-    filter: grayscale(0.5);
-}
-
-.achievement-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
 }
 
 .achievement-card h4 {
-    color: var(--primary-color);
-    margin-bottom: 8px;
-    font-size: 16px;
+    margin-bottom: 4px;
+    font-size: clamp(0.9rem, 2.2vw, 1rem);
 }
 
 .achievement-card p {
-    font-size: 12px;
-    opacity: 0.8;
-    margin-bottom: 15px;
-}
-
-.achievement-progress-bar {
-    height: 4px;
-    background: var(--border-color);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 5px;
-}
-
-.achievement-progress-bar .progress-fill {
-    height: 100%;
-    background: var(--primary-color);
-    transition: width 0.3s;
-}
-
-.progress-text {
-    font-size: 11px;
-    opacity: 0.7;
-}
-
-.unlocked-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: var(--success);
-    color: white;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 10px;
-}
-
-/* ========== СТИЛИ ДЛЯ ВИРТУАЛЬНОГО ТУРА ========== */
-.tour-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.tour-card {
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s;
-    height: 250px;
-}
-
-.tour-card:hover {
-    transform: scale(1.03);
-    box-shadow: var(--hover-shadow);
-}
-
-.tour-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.tour-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    color: white;
-}
-
-.tour-info h4 {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.tour-info p {
-    font-size: 13px;
-    opacity: 0.9;
-    margin-bottom: 2px;
-}
-
-.tour-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: var(--primary-color);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: bold;
-}
-
-/* ========== СТИЛИ ДЛЯ КАЛЕНДАРЯ ========== */
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.calendar-nav {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.calendar-nav button {
-    width: 30px;
-    height: 30px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-color);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.calendar-nav button:hover {
-    background: var(--primary-color);
-    color: white;
-}
-
-#currentMonthYear {
-    font-weight: bold;
-    min-width: 120px;
-    text-align: center;
-}
-
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    margin-bottom: 20px;
-}
-
-.calendar-day {
-    aspect-ratio: 1;
-    padding: 5px;
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: all 0.3s;
-    min-height: 60px;
-}
-
-.calendar-day:hover {
-    transform: scale(1.02);
-    border-color: var(--primary-color);
-    box-shadow: var(--shadow);
-}
-
-.calendar-day.has-work {
-    background: rgba(107, 142, 35, 0.1);
-}
-
-.day-number {
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-bottom: 2px;
-}
-
-.day-work {
-    font-size: 9px;
-    background: var(--primary-color);
-    color: white;
-    padding: 2px 4px;
-    border-radius: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.day-work.spring {
-    background: var(--success);
-}
-
-.day-work.summer {
-    background: var(--warning);
-}
-
-.calendar-legend {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-}
-
-.legend-item i {
-    font-size: 12px;
-}
-
-.legend-item.spring i {
-    color: var(--success);
-}
-
-.legend-item.summer i {
-    color: var(--warning);
-}
-
-.legend-item.autumn i {
-    color: var(--danger);
-}
-
-.legend-item.winter i {
-    color: var(--info);
-}
-
-.btn-add-event {
-    width: 100%;
-    padding: 12px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.3s;
-}
-
-.btn-add-event:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
-/* ========== СТИЛИ ДЛЯ РЫНОЧНЫХ ЦЕН ========== */
-.prices-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.price-update-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    opacity: 0.7;
-}
-
-.btn-refresh {
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--border-color);
-    background: var(--bg-color);
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-refresh:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: rotate(180deg);
-}
-
-.prices-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-.prices-table th,
-.prices-table td {
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    text-align: left;
-}
-
-.prices-table th {
-    background: var(--primary-color);
-    color: white;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.prices-table tr:nth-child(even) {
-    background: var(--card-bg);
-}
-
-.price-value {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-.price-up {
-    color: var(--success);
-    font-weight: 600;
-}
-
-.price-down {
-    color: var(--danger);
-    font-weight: 600;
-}
-
-.price-chart-container {
-    margin-top: 30px;
-    height: 200px;
-}
-
-.price-chart-container h4 {
-    color: var(--primary-color);
-    margin-bottom: 15px;
-    font-size: 16px;
-}
-
-/* ========== СТИЛИ ДЛЯ КАРТЫ ========== */
-.map-container {
-    margin: 20px 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
-    height: 400px;
-    position: relative;
-}
-
-@media (min-width: 768px) {
-    .map-container {
-        height: 500px;
-    }
-}
-
-#ecologyMap {
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-}
-
-.map-controls {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.map-btn {
-    width: 40px;
-    height: 40px;
-    background: white;
-    border: 2px solid var(--primary-color);
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    box-shadow: var(--shadow);
-}
-
-.map-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: scale(1.1);
-}
-
-/* Маркеры на карте */
-.custom-marker {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    cursor: pointer;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-    transition: transform 0.2s;
-}
-
-.custom-marker:hover {
-    transform: scale(1.2) rotate(5deg);
-}
-
-.marker-emoji {
-    background: white;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    border: 2px solid var(--primary-color);
-}
-
-.custom-marker.clean .marker-emoji {
-    border-color: var(--success);
-}
-
-.custom-marker.dirty .marker-emoji {
-    border-color: var(--danger);
-}
-
-/* Popup карты */
-.leaflet-popup-content {
-    min-width: 200px;
-    max-width: 250px;
-}
-
-.leaflet-popup-content h4 {
-    color: var(--primary-color);
-    margin-bottom: 8px;
-    font-size: 16px;
-}
-
-.leaflet-popup-content p {
-    margin-bottom: 5px;
-    font-size: 12px;
-}
-
-.popup-actions {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.popup-btn {
-    flex: 1;
-    padding: 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: all 0.3s;
-}
-
-.popup-btn.edit {
-    background: var(--info);
-    color: white;
-}
-
-.popup-btn.delete {
-    background: var(--danger);
-    color: white;
-}
-
-.popup-btn.share {
-    background: var(--primary-color);
-    color: white;
-}
-
-.popup-btn.warning {
-    background: var(--warning);
-    color: white;
-}
-
-.popup-btn:hover {
-    opacity: 0.8;
-    transform: translateY(-2px);
-}
-
-/* Экологические стили */
-.ecology-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.stat-card {
-    background: var(--card-bg);
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
-    transition: transform 0.3s;
-}
-
-.stat-card:hover {
-    transform: scale(1.05);
-}
-
-.stat-card h4 {
-    color: var(--text-color);
-    margin-bottom: 8px;
-    opacity: 0.8;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-}
-
-.stat-number {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: bold;
-    color: var(--primary-color);
-    line-height: 1.2;
-}
-
-.stat-trend {
-    font-size: 11px;
-    margin-top: 5px;
-}
-
-.stat-trend.positive {
-    color: var(--success);
-}
-
-.stat-trend.negative {
-    color: var(--danger);
-}
-
-/* Фильтры */
-.filter-buttons {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    padding: 8px 16px;
-    border: 2px solid var(--primary-color);
-    background: transparent;
-    color: var(--primary-color);
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: clamp(14px, 2vw, 16px);
-    font-weight: 600;
-    transition: all 0.3s;
-    white-space: nowrap;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-/* Управление метками */
-.marker-controls {
-    margin: 20px 0;
-}
-
-.marker-control-header {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-@media (min-width: 768px) {
-    .marker-control-header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-}
-
-.marker-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.action-btn {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 5px;
-    background: var(--bg-color);
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: 14px;
-    border: 1px solid var(--border-color);
-}
-
-.action-btn:hover {
-    background: var(--primary-color);
-    color: white;
-    transform: translateY(-2px);
-}
-
-.action-btn.danger:hover {
-    background: var(--danger);
-}
-
-.marker-type-selector {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.marker-type-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding: 10px 5px;
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: clamp(11px, 2vw, 13px);
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.marker-type-btn span {
-    font-size: 16px;
-}
-
-.marker-type-btn:hover {
-    background: var(--primary-light);
-    color: white;
-    border-color: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-.marker-type-btn.active {
-    background: var(--primary-color);
-    color: white;
-    border-color: var(--primary-dark);
-    box-shadow: 0 2px 10px rgba(107, 142, 35, 0.3);
-}
-
-.marker-instruction {
-    text-align: center;
-    padding: 12px;
-    background: var(--bg-color);
-    border-radius: 8px;
-    border: 1px dashed var(--border-color);
-    color: var(--text-color);
-    opacity: 0.8;
-    font-size: clamp(14px, 2vw, 16px);
-}
-
-/* Секции мест */
-.places-sections {
-    margin-top: 30px;
-}
-
-.places-section {
-    margin-bottom: 30px;
-}
-
-.section-subtitle {
-    color: var(--text-color);
-    margin-bottom: 15px;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.places-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 15px;
-}
-
-.place-card {
-    background: var(--card-bg);
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border-color);
-    position: relative;
-    transition: transform 0.3s;
-}
-
-.place-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow);
-}
-
-.place-card h4 {
-    color: var(--primary-color);
-    margin-bottom: 10px;
-    padding-right: 25px;
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    word-wrap: break-word;
-}
-
-.place-card p {
-    margin-bottom: 6px;
-    font-size: clamp(0.85rem, 2vw, 0.95rem);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-}
-
-.place-card i {
-    width: 18px;
-    color: var(--primary-color);
-    flex-shrink: 0;
-}
-
-.place-card.clean {
-    border-left: 4px solid var(--success);
-}
-
-.place-card.dirty {
-    border-left: 4px solid var(--danger);
-}
-
-.place-card.observation {
-    border-left: 4px solid var(--info);
-}
-
-.place-card.problem {
-    border-left: 4px solid var(--warning);
-}
-
-.place-card.sampling {
-    border-left: 4px solid #9c27b0;
-}
-
-.place-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: bold;
-    color: white;
-}
-
-.place-badge.clean {
-    background: var(--success);
-}
-
-.place-badge.dirty {
-    background: var(--danger);
-}
-
-.place-badge.observation {
-    background: var(--info);
-}
-
-.place-badge.problem {
-    background: var(--warning);
-}
-
-.place-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
-}
-
-.view-on-map,
-.add-to-route,
-.report-btn,
-.delete-btn {
-    flex: 1;
-    padding: 6px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-}
-
-.view-on-map {
-    background: var(--primary-color);
-    color: white;
-}
-
-.add-to-route {
-    background: var(--info);
-    color: white;
-}
-
-.report-btn {
-    background: var(--warning);
-    color: white;
-}
-
-.delete-btn {
-    background: var(--danger);
-    color: white;
-}
-
-.view-on-map:hover,
-.add-to-route:hover,
-.report-btn:hover,
-.delete-btn:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
-
-.no-markers {
-    text-align: center;
-    padding: 30px;
-    color: var(--text-color);
-    opacity: 0.5;
-    font-style: italic;
-}
-
-/* Конфигурация */
-.config-info {
-    margin-top: 20px;
-    padding: 12px;
-    background: var(--card-bg);
-    border-radius: 8px;
-    text-align: center;
-    border: 1px solid var(--border-color);
-    font-size: 0.9rem;
-    opacity: 0.8;
-    word-wrap: break-word;
-}
-
-/* Аналитика */
-.analytics-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-@media (min-width: 992px) {
-    .analytics-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-.chart-container {
-    position: relative;
-    height: 250px;
-    width: 100%;
-}
-
-/* Таблицы */
-.table-responsive {
-    overflow-x: auto;
-    border-radius: 8px;
-    margin: 0 -1px;
-}
-
-.comparison-table,
-.prices-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    min-width: 600px;
-}
-
-/* Форум */
-.forum-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-@media (min-width: 768px) {
-    .forum-grid {
-        grid-template-columns: 2fr 1fr 1fr;
-    }
-}
-
-.topics-list {
-    max-height: 400px;
-    overflow-y: auto;
-    border-radius: 6px;
-}
-
-.topic-item {
-    padding: 12px;
-    border-bottom: 1px solid var(--border-color);
-    cursor: pointer;
-    transition: all 0.3s;
-    border-radius: 6px;
-}
-
-.topic-item:hover {
-    background: var(--bg-color);
-    transform: translateX(5px);
-}
-
-.topic-title {
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: var(--primary-color);
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    word-wrap: break-word;
-}
-
-.topic-meta {
-    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-    opacity: 0.7;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.btn-new-topic {
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: all 0.3s;
-    font-size: clamp(14px, 2vw, 16px);
-    font-weight: 600;
-}
-
-.btn-new-topic:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
-.active-users,
-.rating-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.user-item,
-.rating-item {
-    padding: 8px;
-    background: var(--bg-color);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid var(--border-color);
-    font-size: clamp(0.85rem, 2vw, 0.95rem);
-}
-
-.user-item i {
-    color: var(--primary-color);
-    font-size: 18px;
-}
-
-.user-item.online i {
-    color: var(--success);
-}
-
-.rating-item {
-    justify-content: space-between;
-}
-
-.rating-place {
-    width: 24px;
-    height: 24px;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.rating-score {
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-/* База знаний */
-.knowledge-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.knowledge-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    border: 1px solid var(--border-color);
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.knowledge-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow);
-    background: var(--primary-color);
-    color: white;
-}
-
-.knowledge-card i {
-    font-size: clamp(30px, 5vw, 40px);
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.knowledge-card:hover i {
-    color: white;
-}
-
-.knowledge-card h4 {
-    margin-bottom: 8px;
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-}
-
-.knowledge-card p {
-    opacity: 0.8;
     font-size: clamp(0.8rem, 2vw, 0.9rem);
+    opacity: 0.8;
+}
+
+.unlocked {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 3px 6px;
+    background: var(--success);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.75rem;
 }
 
 /* Чат-бот */
@@ -2578,7 +1363,7 @@ section {
     bottom: 20px;
     right: 20px;
     width: calc(100% - 40px);
-    max-width: 350px;
+    max-width: 320px;
     background: var(--card-bg);
     border-radius: 12px;
     box-shadow: var(--hover-shadow);
@@ -2591,7 +1376,7 @@ section {
 .chat-header {
     background: var(--primary-color);
     color: white;
-    padding: 12px 15px;
+    padding: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -2601,7 +1386,7 @@ section {
 }
 
 .chat-header i:first-child {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .chat-header i:last-child {
@@ -2610,7 +1395,7 @@ section {
 }
 
 .chat-body {
-    max-height: 450px;
+    max-height: 350px;
     overflow: hidden;
     transition: max-height 0.3s;
 }
@@ -2622,7 +1407,7 @@ section {
 .chat-messages {
     height: 250px;
     overflow-y: auto;
-    padding: 15px;
+    padding: 12px;
 }
 
 .message {
@@ -2640,13 +1425,12 @@ section {
 
 .message-content {
     max-width: 85%;
-    padding: 10px 12px;
+    padding: 8px 12px;
     border-radius: 12px;
     background: var(--bg-color);
     border: 1px solid var(--border-color);
     font-size: clamp(13px, 2vw, 14px);
     word-wrap: break-word;
-    line-height: 1.4;
 }
 
 .message.user .message-content {
@@ -2662,15 +1446,15 @@ section {
 
 .chat-input {
     display: flex;
-    padding: 10px;
+    padding: 8px;
     border-top: 1px solid var(--border-color);
 }
 
 .chat-input input {
     flex: 1;
-    padding: 8px 12px;
+    padding: 8px;
     border: 1px solid var(--border-color);
-    border-radius: 20px 0 0 20px;
+    border-radius: 5px 0 0 5px;
     background: var(--bg-color);
     color: var(--text-color);
     font-size: clamp(13px, 2vw, 14px);
@@ -2683,11 +1467,11 @@ section {
 }
 
 .chat-input button {
-    padding: 8px 15px;
+    padding: 8px 12px;
     background: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 0 20px 20px 0;
+    border-radius: 0 5px 5px 0;
     cursor: pointer;
     transition: background 0.3s;
     flex-shrink: 0;
@@ -2695,31 +1479,6 @@ section {
 
 .chat-input button:hover {
     background: var(--primary-dark);
-}
-
-.chat-quick-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    padding: 10px;
-    border-top: 1px solid var(--border-color);
-}
-
-.chat-quick-actions button {
-    flex: 1;
-    min-width: 70px;
-    padding: 5px;
-    background: var(--bg-color);
-    border: 1px solid var(--border-color);
-    border-radius: 15px;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.chat-quick-actions button:hover {
-    background: var(--primary-color);
-    color: white;
 }
 
 /* Кнопка наверх */
@@ -2789,7 +1548,7 @@ section {
     background: var(--card-bg);
     border-radius: 12px;
     padding: 25px;
-    max-width: 500px;
+    max-width: 450px;
     width: 100%;
     position: relative;
     max-height: 90vh;
@@ -2825,7 +1584,7 @@ section {
 
 .btn-primary {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     background: var(--primary-color);
     color: white;
     border: none;
@@ -2954,27 +1713,6 @@ footer {
     color: white;
 }
 
-.btn-export-data {
-    margin-top: 15px;
-    padding: 8px 16px;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s;
-}
-
-.btn-export-data:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-}
-
 /* Адаптивность */
 @media (max-width: 992px) {
     :root {
@@ -3003,14 +1741,6 @@ footer {
     
     section {
         scroll-margin-top: 0;
-    }
-    
-    .weather-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .weather-forecast {
-        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
     }
 }
 
@@ -3050,47 +1780,6 @@ footer {
         right: 10px;
         max-width: calc(100% - 20px);
     }
-    
-    .marker-type-selector {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .calculator-grid,
-    .calculators-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .calendar-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
-    
-    .calendar-day {
-        min-height: 50px;
-    }
-    
-    .marketplace-filters {
-        flex-direction: column;
-    }
-    
-    .cooperation-tabs {
-        flex-direction: column;
-    }
-    
-    .tab-btn {
-        width: 100%;
-    }
-    
-    .forum-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .comparison-selector {
-        flex-direction: column;
-    }
-    
-    .btn-compare {
-        width: 100%;
-    }
 }
 
 @media (max-width: 480px) {
@@ -3105,8 +1794,7 @@ footer {
     .company-list,
     .places-grid,
     .knowledge-grid,
-    .achievements-grid,
-    .marketplace-grid {
+    .achievements-grid {
         grid-template-columns: 1fr;
     }
     
@@ -3124,7 +1812,7 @@ footer {
     }
     
     .calendar-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
     }
     
     .chat-bot {
@@ -3153,23 +1841,5 @@ footer {
     
     .result-value {
         align-self: flex-end;
-    }
-    
-    .weather-details {
-        flex-direction: column;
-        gap: 5px;
-    }
-    
-    .place-actions {
-        flex-direction: column;
-    }
-    
-    .achievements-stats {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .achievement-progress {
-        width: 100%;
     }
 }
