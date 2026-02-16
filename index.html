@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Сельское хозяйство Брянской области</title>
     
     <!-- PWA Manifest -->
@@ -16,23 +16,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- Дополнительные стили для карты -->
-    <style>
-        #ecologyMap {
-            height: 500px;
-            width: 100%;
-            border-radius: 8px;
-            z-index: 1;
-        }
-        .leaflet-popup-content {
-            min-width: 200px;
-        }
-        .leaflet-popup-content h4 {
-            color: #6b8e23;
-            margin-bottom: 8px;
-        }
-    </style>
 </head>
 <body class="light-theme">
     <!-- Шапка сайта -->
@@ -41,9 +24,15 @@
             <div class="header-content">
                 <div class="logo">
                     <i class="fas fa-seedling"></i>
-                    Агро-Брянск
+                    <span>Агро-Брянск</span>
                 </div>
-                <nav>
+                
+                <!-- Мобильное меню -->
+                <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+                
+                <nav id="mainNav">
                     <ul>
                         <li><a href="#soils"><i class="fas fa-map"></i> Почвы</a></li>
                         <li><a href="#technique"><i class="fas fa-tractor"></i> Техника</a></li>
@@ -61,6 +50,7 @@
                         <li><a href="#virtual-tour"><i class="fas fa-vr-cardboard"></i> Тур</a></li>
                     </ul>
                 </nav>
+                
                 <div class="header-actions">
                     <a href="bbc.html" class="cta"><i class="fas fa-newspaper"></i> Новости</a>
                     <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
@@ -198,7 +188,7 @@
                         </div>
                     </div>
                     
-                    <!-- Новая секция: Биржа аренды техники -->
+                    <!-- Биржа аренды техники -->
                     <div class="exchange-section">
                         <h4><i class="fas fa-exchange-alt"></i> Биржа аренды техники</h4>
                         <div class="exchange-grid" id="techniqueExchange">
@@ -327,7 +317,7 @@
                     </div>
                 </div>
 
-                <!-- Новая секция: Прогноз погоды -->
+                <!-- Прогноз погоды -->
                 <div class="weather-section card">
                     <h3><i class="fas fa-cloud-sun"></i> Прогноз погоды для полевых работ</h3>
                     <div class="weather-grid" id="weatherGrid">
@@ -439,7 +429,7 @@
             </div>
         </section>
 
-        <!-- Новая секция: Погода -->
+        <!-- Секция: Погода -->
         <section id="weather">
             <div class="container">
                 <h2 class="section-title">Агрометеорология</h2>
@@ -465,7 +455,7 @@
             </div>
         </section>
 
-        <!-- Новая секция: Маркетплейс -->
+        <!-- Секция: Маркетплейс -->
         <section id="marketplace">
             <div class="container">
                 <h2 class="section-title">Маркетплейс</h2>
@@ -497,7 +487,7 @@
             </div>
         </section>
 
-        <!-- Новая секция: Кооперация -->
+        <!-- Секция: Кооперация -->
         <section id="cooperation">
             <div class="container">
                 <h2 class="section-title">Кооперация и совместные закупки</h2>
@@ -516,7 +506,7 @@
             </div>
         </section>
 
-        <!-- Новая секция: Распознавание болезней -->
+        <!-- Секция: Распознавание болезней -->
         <section id="disease">
             <div class="container">
                 <h2 class="section-title">Распознавание болезней растений</h2>
@@ -540,7 +530,7 @@
             </div>
         </section>
 
-        <!-- Новая секция: Виртуальный тур -->
+        <!-- Секция: Виртуальный тур -->
         <section id="virtual-tour">
             <div class="container">
                 <h2 class="section-title">Виртуальный тур по полям</h2>
@@ -665,7 +655,7 @@
                         </table>
                     </div>
                     
-                    <!-- Новая секция: Сравнение культур -->
+                    <!-- Сравнение культур -->
                     <div class="comparison-selector">
                         <select id="compareCrop1" class="form-control">
                             <option value="">Выберите культуру</option>
@@ -747,7 +737,7 @@
                     </div>
                 </div>
 
-                <!-- Новая секция: Поиск по базе знаний -->
+                <!-- Поиск по базе знаний -->
                 <div class="knowledge-search">
                     <input type="text" id="knowledgeSearch" placeholder="Поиск в базе знаний..." class="form-control">
                     <button onclick="searchKnowledge()" class="btn-search">
@@ -757,12 +747,12 @@
             </div>
         </section>
 
-        <!-- Новая секция: Калькуляторы -->
+        <!-- Секция: Калькуляторы -->
         <section id="calculators">
             <div class="container">
                 <h2 class="section-title">Калькуляторы</h2>
                 <div class="calculators-grid">
-                    <!-- Калькулятор рентабельности (существующий) -->
+                    <!-- Калькулятор рентабельности -->
                     <div class="card">
                         <h3><i class="fas fa-calculator"></i> Рентабельность</h3>
                         <div class="calculator-inputs">
@@ -807,7 +797,7 @@
                         </div>
                     </div>
 
-                    <!-- Новый калькулятор: Нормы высева -->
+                    <!-- Калькулятор: Нормы высева -->
                     <div class="card">
                         <h3><i class="fas fa-seedling"></i> Нормы высева</h3>
                         <div class="calculator-inputs">
@@ -835,7 +825,7 @@
                         <div class="calculator-result" id="seedingResult"></div>
                     </div>
 
-                    <!-- Новый калькулятор: Удобрения -->
+                    <!-- Калькулятор: Удобрения -->
                     <div class="card">
                         <h3><i class="fas fa-flask"></i> Удобрения</h3>
                         <div class="calculator-inputs">
@@ -894,7 +884,7 @@
             </div>
         </section>
 
-        <!-- Новая секция: Достижения -->
+        <!-- Секция: Достижения -->
         <section id="achievements">
             <div class="container">
                 <h2 class="section-title">Мои достижения</h2>
@@ -912,7 +902,7 @@
         </section>
     </main>
 
-    <!-- Чат-бот -->
+    <!-- Чат-бот (уменьшенный) -->
     <div class="chat-bot" id="chatBot">
         <div class="chat-header" onclick="toggleChat()">
             <i class="fas fa-robot"></i>
@@ -932,7 +922,7 @@
                 <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
             <div class="chat-quick-actions">
-                <button onclick="quickQuestion('нормы высева пшеницы')">🌾 Нормы высева</button>
+                <button onclick="quickQuestion('нормы высева пшеницы')">🌾 Нормы</button>
                 <button onclick="quickQuestion('болезни картофеля')">🥔 Болезни</button>
                 <button onclick="quickQuestion('погода на неделю')">☀️ Погода</button>
                 <button onclick="quickQuestion('удобрения для кукурузы')">🌽 Удобрения</button>
@@ -990,7 +980,7 @@
         </div>
     </div>
 
-    <!-- Новое модальное окно: Добавление товара -->
+    <!-- Модальное окно: Добавление товара -->
     <div class="modal" id="addProductModal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('addProductModal')">&times;</span>
