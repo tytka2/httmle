@@ -19,9 +19,19 @@
     
     <!-- Дополнительные стили для карты -->
     <style>
-        #ecologyMap { height: 500px; width: 100%; border-radius: 8px; z-index: 1; }
-        .leaflet-popup-content { min-width: 200px; }
-        .leaflet-popup-content h4 { color: #6b8e23; margin-bottom: 8px; }
+        #ecologyMap {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+            z-index: 1;
+        }
+        .leaflet-popup-content {
+            min-width: 200px;
+        }
+        .leaflet-popup-content h4 {
+            color: #6b8e23;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body class="light-theme">
@@ -46,6 +56,9 @@
                         <li><a href="#knowledge"><i class="fas fa-book"></i> База знаний</a></li>
                         <li><a href="#weather"><i class="fas fa-cloud-sun"></i> Погода</a></li>
                         <li><a href="#marketplace"><i class="fas fa-store"></i> Маркетплейс</a></li>
+                        <li><a href="#cooperation"><i class="fas fa-handshake"></i> Кооперация</a></li>
+                        <li><a href="#disease"><i class="fas fa-leaf"></i> Диагностика</a></li>
+                        <li><a href="#virtual-tour"><i class="fas fa-vr-cardboard"></i> Тур</a></li>
                     </ul>
                 </nav>
                 <div class="header-actions">
@@ -87,7 +100,7 @@
         <div class="container">
             <h1>Сельское хозяйство Брянской области</h1>
             <p>Ведущие агропредприятия, современные технологии и экологический подход</p>
-            <div class="hero-stats" id="heroStats">
+            <div class="hero-stats">
                 <div class="hero-stat">
                     <span class="hero-stat-value">150+</span>
                     <span class="hero-stat-label">Предприятий</span>
@@ -118,13 +131,36 @@
                     <h3><i class="fas fa-map-marked-alt"></i> Ведущие агрофирмы</h3>
                     <p>В Брянской области преобладают дерново-подзолистые, серые лесные и торфяно-болотные почвы. Местные агрофирмы успешно работают с каждым типом почв.</p>
                     
-                    <div class="company-list" id="companyList">
-                        <!-- Динамическая загрузка -->
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>Агрофирма "Брянский Нива"</h4>
+                            <p><i class="fas fa-tag"></i> Зерновые, картофель</p>
+                            <p><i class="fas fa-mountain"></i> Дерново-подзолистые</p>
+                            <p><i class="fas fa-chart-area"></i> 12 000 га</p>
+                            <p><i class="fas fa-star"></i> Рейтинг: 4.5/5</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "Брянская мясная компания"</h4>
+                            <p><i class="fas fa-tag"></i> Животноводство</p>
+                            <p><i class="fas fa-mountain"></i> Серые лесные</p>
+                            <p><i class="fas fa-chart-area"></i> 8 500 га</p>
+                            <p><i class="fas fa-star"></i> Рейтинг: 4.2/5</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Агрохолдинг Добрунь"</h4>
+                            <p><i class="fas fa-tag"></i> Овощеводство</p>
+                            <p><i class="fas fa-mountain"></i> Торфяно-болотные</p>
+                            <p><i class="fas fa-chart-area"></i> 1 200 га</p>
+                            <p><i class="fas fa-star"></i> Рейтинг: 4.8/5</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>СПК "Красный Октябрь"</h4>
+                            <p><i class="fas fa-tag"></i> Молочное животноводство</p>
+                            <p><i class="fas fa-mountain"></i> Дерново-подзолистые</p>
+                            <p><i class="fas fa-chart-area"></i> 6 800 га</p>
+                            <p><i class="fas fa-star"></i> Рейтинг: 4.3/5</p>
+                        </div>
                     </div>
-                    
-                    <button class="btn-add-company" onclick="showAddCompanyModal()">
-                        <i class="fas fa-plus"></i> Добавить предприятие
-                    </button>
                 </div>
             </div>
         </section>
@@ -135,15 +171,49 @@
                 <h2 class="section-title">Сельхозтехника</h2>
                 <div class="card">
                     <h3><i class="fas fa-tools"></i> Производители и сервис</h3>
-                    <div class="company-list" id="techniqueList">
-                        <!-- Динамическая загрузка -->
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>ООО "БрянскАгроМаш"</h4>
+                            <p><i class="fas fa-cog"></i> Тракторы Брянец-240</p>
+                            <p><i class="fas fa-wrench"></i> Культиваторы, сеялки</p>
+                            <p><i class="fas fa-calendar"></i> С 2005 года</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "Агротехсервис"</h4>
+                            <p><i class="fas fa-wrench"></i> Ремонт и обслуживание</p>
+                            <p><i class="fas fa-map-marker-alt"></i> 12 филиалов</p>
+                            <p><i class="fas fa-gps"></i> Установка GPS</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Брянский лизинговый центр"</h4>
+                            <p><i class="fas fa-handshake"></i> Лизинг техники</p>
+                            <p><i class="fas fa-building"></i> John Deere, CLAAS</p>
+                            <p><i class="fas fa-users"></i> 200+ хозяйств</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ПК "Агрозапчасть"</h4>
+                            <p><i class="fas fa-gear"></i> Производство запчастей</p>
+                            <p><i class="fas fa-globe"></i> Экспорт в 5 стран</p>
+                            <p><i class="fas fa-certificate"></i> ГОСТ Р</p>
+                        </div>
                     </div>
                     
-                    <!-- Биржа техники -->
+                    <!-- Новая секция: Биржа аренды техники -->
                     <div class="exchange-section">
                         <h4><i class="fas fa-exchange-alt"></i> Биржа аренды техники</h4>
                         <div class="exchange-grid" id="techniqueExchange">
-                            <!-- Динамическая загрузка -->
+                            <div class="exchange-item">
+                                <h5>Трактор МТЗ-82</h5>
+                                <p>Аренда: 2500 ₽/час</p>
+                                <p>Владелец: ИП Петров</p>
+                                <button onclick="contactOwner('+79001234567')">Связаться</button>
+                            </div>
+                            <div class="exchange-item">
+                                <h5>Комбайн Acros 595</h5>
+                                <p>Аренда: 5000 ₽/час</p>
+                                <p>Владелец: ООО "АгроТех"</p>
+                                <button onclick="contactOwner('+79007654321')">Связаться</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -156,8 +226,31 @@
                 <h2 class="section-title">Агротехнологии</h2>
                 <div class="card">
                     <h3><i class="fas fa-rocket"></i> Инновации в сельском хозяйстве</h3>
-                    <div class="company-list" id="technologiesList">
-                        <!-- Динамическая загрузка -->
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>ООО "АгроТех Брянск"</h4>
+                            <p><i class="fas fa-satellite"></i> Точное земледелие</p>
+                            <p><i class="fas fa-drone"></i> Дроны для мониторинга</p>
+                            <p><i class="fas fa-map"></i> 45 хозяйств</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>НПО "БиоАгро"</h4>
+                            <p><i class="fas fa-flask"></i> Биопрепараты</p>
+                            <p><i class="fas fa-seedling"></i> Органические удобрения</p>
+                            <p><i class="fas fa-microscope"></i> 3 лаборатории</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Тепличный комбинат"</h4>
+                            <p><i class="fas fa-water"></i> Гидропоника</p>
+                            <p><i class="fas fa-sun"></i> LED-освещение</p>
+                            <p><i class="fas fa-chart-line"></i> 5000 т/год</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "АгроАналитика"</h4>
+                            <p><i class="fas fa-chart-bar"></i> Анализ почв</p>
+                            <p><i class="fas fa-calculator"></i> Прогноз урожайности</p>
+                            <p><i class="fas fa-check-circle"></i> 80% хозяйств</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -169,8 +262,31 @@
                 <h2 class="section-title">Производство</h2>
                 <div class="card">
                     <h3><i class="fas fa-store"></i> Производители продукции</h3>
-                    <div class="company-list" id="productionList">
-                        <!-- Динамическая загрузка -->
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>АО "Брянский молочный комбинат"</h4>
+                            <p><i class="fas fa-glass-cheers"></i> Молоко, сыры, йогурты</p>
+                            <p><i class="fas fa-weight-hanging"></i> 50 т/сутки</p>
+                            <p><i class="fas fa-trophy"></i> Лучший продукт 2025</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Брянский картофель"</h4>
+                            <p><i class="fas fa-carrot"></i> Картофель, овощи</p>
+                            <p><i class="fas fa-chart-area"></i> 3 500 га</p>
+                            <p><i class="fas fa-truck"></i> Свежая продукция</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "Брянский свинокомплекс"</h4>
+                            <p><i class="fas fa-piggy-bank"></i> Свинина</p>
+                            <p><i class="fas fa-weight-hanging"></i> 10 000 голов/год</p>
+                            <p><i class="fas fa-certificate"></i> Халяль</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "Брянская зерновая"</h4>
+                            <p><i class="fas fa-wheat-alt"></i> Пшеница, ячмень</p>
+                            <p><i class="fas fa-weight-hanging"></i> 25 000 т/год</p>
+                            <p><i class="fas fa-ship"></i> На экспорт</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -183,12 +299,35 @@
                 
                 <div class="card">
                     <h3><i class="fas fa-recycle"></i> Экологические инициативы</h3>
-                    <div class="company-list" id="ecologyList">
-                        <!-- Динамическая загрузка -->
+                    <div class="company-list">
+                        <div class="company-item">
+                            <h4>ООО "ЭкоАгро Брянск"</h4>
+                            <p><i class="fas fa-leaf"></i> Органическое земледелие</p>
+                            <p><i class="fas fa-certificate"></i> EU Organic</p>
+                            <p><i class="fas fa-check-double"></i> ГОСТ 33980</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ЗАО "Биоэнергия"</h4>
+                            <p><i class="fas fa-bolt"></i> Биогазовые установки</p>
+                            <p><i class="fas fa-solar-panel"></i> 5 МВт энергии</p>
+                            <p><i class="fas fa-recycle"></i> Переработка отходов</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>ООО "АгроЭкология"</h4>
+                            <p><i class="fas fa-microscope"></i> Анализ почв и воды</p>
+                            <p><i class="fas fa-flask"></i> Экологический аудит</p>
+                            <p><i class="fas fa-users"></i> 30 хозяйств</p>
+                        </div>
+                        <div class="company-item">
+                            <h4>СПК "Зеленый путь"</h4>
+                            <p><i class="fas fa-tree"></i> Восстановление почв</p>
+                            <p><i class="fas fa-chart-line"></i> +15% плодородия</p>
+                            <p><i class="fas fa-seedling"></i> Сидерация</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Прогноз погоды -->
+                <!-- Новая секция: Прогноз погоды -->
                 <div class="weather-section card">
                     <h3><i class="fas fa-cloud-sun"></i> Прогноз погоды для полевых работ</h3>
                     <div class="weather-grid" id="weatherGrid">
@@ -300,10 +439,147 @@
             </div>
         </section>
 
+        <!-- Новая секция: Погода -->
+        <section id="weather">
+            <div class="container">
+                <h2 class="section-title">Агрометеорология</h2>
+                <div class="weather-full card">
+                    <div class="weather-header">
+                        <h3><i class="fas fa-cloud-sun"></i> Прогноз на 7 дней</h3>
+                        <button onclick="refreshWeather()" class="btn-refresh">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="weather-days" id="weatherDays"></div>
+                    
+                    <div class="agro-indicators">
+                        <h4>Агрометеорологические показатели</h4>
+                        <div class="indicators-grid" id="agroIndicators"></div>
+                    </div>
+
+                    <div class="field-work-recommendations">
+                        <h4><i class="fas fa-tasks"></i> Рекомендации на сегодня</h4>
+                        <ul id="workRecommendations"></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Новая секция: Маркетплейс -->
+        <section id="marketplace">
+            <div class="container">
+                <h2 class="section-title">Маркетплейс</h2>
+                
+                <div class="marketplace-categories">
+                    <button class="category-btn active" onclick="filterMarketplace('all')">Все</button>
+                    <button class="category-btn" onclick="filterMarketplace('seeds')">Семена</button>
+                    <button class="category-btn" onclick="filterMarketplace('fertilizers')">Удобрения</button>
+                    <button class="category-btn" onclick="filterMarketplace('equipment')">Техника</button>
+                    <button class="category-btn" onclick="filterMarketplace('crops')">Урожай</button>
+                    <button class="category-btn" onclick="filterMarketplace('services')">Услуги</button>
+                </div>
+
+                <div class="marketplace-filters">
+                    <input type="text" id="marketplaceSearch" placeholder="Поиск товаров и услуг..." class="form-control">
+                    <select id="marketplaceSort" class="form-control" onchange="sortMarketplace()">
+                        <option value="priceAsc">Цена (по возрастанию)</option>
+                        <option value="priceDesc">Цена (по убыванию)</option>
+                        <option value="newest">Сначала новые</option>
+                        <option value="popular">Популярные</option>
+                    </select>
+                </div>
+
+                <div class="marketplace-grid" id="marketplaceGrid"></div>
+
+                <button class="btn-add-product" onclick="showAddProductModal()">
+                    <i class="fas fa-plus"></i> Добавить товар/услугу
+                </button>
+            </div>
+        </section>
+
+        <!-- Новая секция: Кооперация -->
+        <section id="cooperation">
+            <div class="container">
+                <h2 class="section-title">Кооперация и совместные закупки</h2>
+                
+                <div class="cooperation-tabs">
+                    <button class="tab-btn active" onclick="showCoopTab('offers')">Предложения</button>
+                    <button class="tab-btn" onclick="showCoopTab('requests')">Потребности</button>
+                    <button class="tab-btn" onclick="showCoopTab('joint')">Совместные закупки</button>
+                </div>
+
+                <div class="cooperation-content" id="coopOffers"></div>
+
+                <button class="btn-add-coop" onclick="showAddCoopModal()">
+                    <i class="fas fa-plus"></i> Создать предложение
+                </button>
+            </div>
+        </section>
+
+        <!-- Новая секция: Распознавание болезней -->
+        <section id="disease">
+            <div class="container">
+                <h2 class="section-title">Распознавание болезней растений</h2>
+                <div class="card recognition-card">
+                    <div class="recognition-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Загрузите фото растения для диагностики</p>
+                        <input type="file" id="plantPhoto" accept="image/*" onchange="identifyDisease(this)" style="display: none;">
+                        <button onclick="document.getElementById('plantPhoto').click()" class="btn-upload">
+                            Выбрать фото
+                        </button>
+                    </div>
+                    
+                    <div class="recognition-result" id="recognitionResult" style="display: none;"></div>
+
+                    <div class="recognition-history">
+                        <h4>История диагностики</h4>
+                        <div id="diagnosisHistory"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Новая секция: Виртуальный тур -->
+        <section id="virtual-tour">
+            <div class="container">
+                <h2 class="section-title">Виртуальный тур по полям</h2>
+                <div class="tour-grid">
+                    <div class="tour-card" onclick="startVirtualTour('field1')">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80" alt="Поле 1">
+                        <div class="tour-info">
+                            <h4>Поле "Северное"</h4>
+                            <p>Площадь: 120 га</p>
+                            <p>Культура: Пшеница</p>
+                            <span class="tour-badge">360°</span>
+                        </div>
+                    </div>
+                    <div class="tour-card" onclick="startVirtualTour('field2')">
+                        <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=600&q=80" alt="Поле 2">
+                        <div class="tour-info">
+                            <h4>Поле "Придорожное"</h4>
+                            <p>Площадь: 85 га</p>
+                            <p>Культура: Кукуруза</p>
+                            <span class="tour-badge">360°</span>
+                        </div>
+                    </div>
+                    <div class="tour-card" onclick="startVirtualTour('farm')">
+                        <img src="https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?auto=format&fit=crop&w=600&q=80" alt="Ферма">
+                        <div class="tour-info">
+                            <h4>Животноводческий комплекс</h4>
+                            <p>КРС: 500 голов</p>
+                            <p>Производство молока</p>
+                            <span class="tour-badge">3D</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Секция аналитики -->
         <section id="analytics">
             <div class="container">
-                <h2 class="section-title">Аналитика и прогнозирование</h2>
+                <h2 class="section-title">Аналитика</h2>
                 <div class="analytics-grid">
                     <div class="card">
                         <h3><i class="fas fa-chart-line"></i> Динамика производства</h3>
@@ -325,27 +601,6 @@
                             <canvas id="ecologyChart"></canvas>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <h3><i class="fas fa-chart-line"></i> Прогноз урожайности 2026</h3>
-                        <div class="chart-container">
-                            <canvas id="yieldForecastChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3><i class="fas fa-temperature-high"></i> Влияние погоды на урожай</h3>
-                        <div class="chart-container">
-                            <canvas id="weatherImpactChart"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3><i class="fas fa-chart-pie"></i> Распределение почв</h3>
-                        <div class="chart-container">
-                            <canvas id="soilChart"></canvas>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -357,7 +612,7 @@
                 <div class="card">
                     <h3><i class="fas fa-balance-scale"></i> Ключевые показатели</h3>
                     <div class="table-responsive">
-                        <table class="comparison-table" id="comparisonTable">
+                        <table class="comparison-table">
                             <thead>
                                 <tr>
                                     <th>Предприятие</th>
@@ -367,16 +622,50 @@
                                     <th>Сотрудники</th>
                                     <th>Эко-рейтинг</th>
                                     <th>Эффективность</th>
-                                    <th>Прогноз роста</th>
                                 </tr>
                             </thead>
-                            <tbody id="comparisonTableBody">
-                                <!-- Динамическая загрузка -->
+                            <tbody>
+                                <tr>
+                                    <td>Агрофирма "Брянский Нива"</td>
+                                    <td>Зерновые</td>
+                                    <td>12 000</td>
+                                    <td>850</td>
+                                    <td>320</td>
+                                    <td>4.2/5</td>
+                                    <td>85%</td>
+                                </tr>
+                                <tr>
+                                    <td>ЗАО "Брянская мясная"</td>
+                                    <td>Животноводство</td>
+                                    <td>8 500</td>
+                                    <td>720</td>
+                                    <td>280</td>
+                                    <td>3.8/5</td>
+                                    <td>78%</td>
+                                </tr>
+                                <tr>
+                                    <td>ООО "Агрохолдинг Добрунь"</td>
+                                    <td>Овощеводство</td>
+                                    <td>1 200</td>
+                                    <td>450</td>
+                                    <td>150</td>
+                                    <td>4.5/5</td>
+                                    <td>92%</td>
+                                </tr>
+                                <tr>
+                                    <td>ООО "ЭкоАгро Брянск"</td>
+                                    <td>Органическое</td>
+                                    <td>2 500</td>
+                                    <td>380</td>
+                                    <td>95</td>
+                                    <td>5.0/5</td>
+                                    <td>88%</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     
-                    <!-- Селектор для сравнения -->
+                    <!-- Новая секция: Сравнение культур -->
                     <div class="comparison-selector">
                         <select id="compareCrop1" class="form-control">
                             <option value="">Выберите культуру</option>
@@ -407,9 +696,7 @@
                 <div class="forum-grid">
                     <div class="card">
                         <h3><i class="fas fa-comments"></i> Последние обсуждения</h3>
-                        <div class="topics-list" id="topicsList">
-                            <!-- Динамическая загрузка -->
-                        </div>
+                        <div class="topics-list" id="topicsList"></div>
                         <button class="btn-new-topic" onclick="showNewTopicForm()">
                             <i class="fas fa-plus"></i> Новая тема
                         </button>
@@ -417,16 +704,7 @@
                     
                     <div class="card">
                         <h3><i class="fas fa-users"></i> Активные пользователи</h3>
-                        <div class="active-users" id="activeUsers">
-                            <!-- Динамическая загрузка -->
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <h3><i class="fas fa-trophy"></i> Рейтинг агрономов</h3>
-                        <div class="rating-list" id="ratingList">
-                            <!-- Динамическая загрузка -->
-                        </div>
+                        <div class="active-users" id="activeUsers"></div>
                     </div>
                 </div>
             </div>
@@ -464,105 +742,27 @@
                     </div>
                     <div class="knowledge-card" onclick="showTechGuide()">
                         <i class="fas fa-tractor"></i>
-                        <h4>Техника и оборудование</h4>
+                        <h4>Техника</h4>
                         <p>Обзоры и характеристики</p>
                     </div>
                 </div>
 
-                <!-- Поиск по базе знаний -->
+                <!-- Новая секция: Поиск по базе знаний -->
                 <div class="knowledge-search">
                     <input type="text" id="knowledgeSearch" placeholder="Поиск в базе знаний..." class="form-control">
                     <button onclick="searchKnowledge()" class="btn-search">
                         <i class="fas fa-search"></i> Найти
                     </button>
                 </div>
-
-                <!-- Популярные статьи -->
-                <div class="popular-articles">
-                    <h3><i class="fas fa-star"></i> Популярные статьи</h3>
-                    <div class="articles-list" id="popularArticles">
-                        <!-- Динамическая загрузка -->
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- Секция погоды -->
-        <section id="weather">
-            <div class="container">
-                <h2 class="section-title">Агрометеорология</h2>
-                <div class="weather-full card">
-                    <div class="weather-header">
-                        <h3><i class="fas fa-cloud-sun"></i> Прогноз на 7 дней</h3>
-                        <button onclick="refreshWeather()" class="btn-refresh">
-                            <i class="fas fa-sync-alt"></i> Обновить
-                        </button>
-                    </div>
-                    <div class="weather-days" id="weatherDays">
-                        <!-- Динамическая загрузка -->
-                    </div>
-                    
-                    <div class="agro-indicators">
-                        <h4>Агрометеорологические показатели</h4>
-                        <div class="indicators-grid" id="agroIndicators">
-                            <!-- Динамическая загрузка -->
-                        </div>
-                    </div>
-
-                    <div class="field-work-recommendations">
-                        <h4><i class="fas fa-tasks"></i> Рекомендации на сегодня</h4>
-                        <ul id="workRecommendations">
-                            <!-- Динамическая загрузка -->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция маркетплейса -->
-        <section id="marketplace">
-            <div class="container">
-                <h2 class="section-title">Маркетплейс</h2>
-                
-                <!-- Категории -->
-                <div class="marketplace-categories">
-                    <button class="category-btn active" onclick="filterMarketplace('all')">Все</button>
-                    <button class="category-btn" onclick="filterMarketplace('seeds')">Семена</button>
-                    <button class="category-btn" onclick="filterMarketplace('fertilizers')">Удобрения</button>
-                    <button class="category-btn" onclick="filterMarketplace('equipment')">Техника</button>
-                    <button class="category-btn" onclick="filterMarketplace('crops')">Урожай</button>
-                    <button class="category-btn" onclick="filterMarketplace('services')">Услуги</button>
-                </div>
-
-                <!-- Поиск и фильтры -->
-                <div class="marketplace-filters">
-                    <input type="text" id="marketplaceSearch" placeholder="Поиск товаров и услуг..." class="form-control">
-                    <select id="marketplaceSort" class="form-control" onchange="sortMarketplace()">
-                        <option value="priceAsc">Цена (по возрастанию)</option>
-                        <option value="priceDesc">Цена (по убыванию)</option>
-                        <option value="newest">Сначала новые</option>
-                        <option value="popular">Популярные</option>
-                    </select>
-                </div>
-
-                <!-- Товары -->
-                <div class="marketplace-grid" id="marketplaceGrid">
-                    <!-- Динамическая загрузка -->
-                </div>
-
-                <!-- Кнопка добавления товара -->
-                <button class="btn-add-product" onclick="showAddProductModal()">
-                    <i class="fas fa-plus"></i> Добавить товар/услугу
-                </button>
-            </div>
-        </section>
-
-        <!-- Калькуляторы -->
+        <!-- Новая секция: Калькуляторы -->
         <section id="calculators">
             <div class="container">
                 <h2 class="section-title">Калькуляторы</h2>
                 <div class="calculators-grid">
-                    <!-- Калькулятор рентабельности -->
+                    <!-- Калькулятор рентабельности (существующий) -->
                     <div class="card">
                         <h3><i class="fas fa-calculator"></i> Рентабельность</h3>
                         <div class="calculator-inputs">
@@ -607,7 +807,7 @@
                         </div>
                     </div>
 
-                    <!-- Калькулятор норм высева -->
+                    <!-- Новый калькулятор: Нормы высева -->
                     <div class="card">
                         <h3><i class="fas fa-seedling"></i> Нормы высева</h3>
                         <div class="calculator-inputs">
@@ -632,12 +832,10 @@
                                 <i class="fas fa-calculator"></i> Рассчитать
                             </button>
                         </div>
-                        <div class="calculator-result" id="seedingResult">
-                            <!-- Результат будет здесь -->
-                        </div>
+                        <div class="calculator-result" id="seedingResult"></div>
                     </div>
 
-                    <!-- Калькулятор удобрений -->
+                    <!-- Новый калькулятор: Удобрения -->
                     <div class="card">
                         <h3><i class="fas fa-flask"></i> Удобрения</h3>
                         <div class="calculator-inputs">
@@ -667,28 +865,18 @@
                                 <i class="fas fa-calculator"></i> Рассчитать
                             </button>
                         </div>
-                        <div class="calculator-result" id="fertilizerResult">
-                            <!-- Результат будет здесь -->
-                        </div>
+                        <div class="calculator-result" id="fertilizerResult"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Рыночные цены -->
+        <!-- Секция рыночных цен -->
         <section id="prices">
             <div class="container">
                 <h2 class="section-title">Рыночные цены</h2>
                 <div class="card">
-                    <div class="prices-header">
-                        <h3><i class="fas fa-chart-line"></i> Актуальные цены на сельхозпродукцию</h3>
-                        <div class="price-update-info">
-                            <span>Обновлено: <span id="priceUpdateTime">только что</span></span>
-                            <button onclick="refreshPrices()" class="btn-refresh">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <h3><i class="fas fa-chart-line"></i> Актуальные цены</h3>
                     <div class="table-responsive">
                         <table class="prices-table" id="pricesTable">
                             <thead>
@@ -697,58 +885,16 @@
                                     <th>Цена за кг</th>
                                     <th>Изменение</th>
                                     <th>Прогноз</th>
-                                    <th>Объем предложения</th>
                                 </tr>
                             </thead>
-                            <tbody id="pricesTableBody">
-                                <!-- Динамическая загрузка -->
-                            </tbody>
+                            <tbody id="pricesTableBody"></tbody>
                         </table>
                     </div>
-                    
-                    <!-- График цен -->
-                    <div class="price-chart-container">
-                        <h4>Динамика цен за год</h4>
-                        <canvas id="priceHistoryChart"></canvas>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Календарь работ -->
-        <section id="workCalendar">
-            <div class="container">
-                <h2 class="section-title">Календарь полевых работ</h2>
-                <div class="card">
-                    <div class="calendar-header">
-                        <h3><i class="fas fa-calendar-alt"></i> Март 2026</h3>
-                        <div class="calendar-nav">
-                            <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
-                            <span id="currentMonthYear">Март 2026</span>
-                            <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                    </div>
-                    <div class="calendar-grid" id="calendarGrid">
-                        <!-- Динамическая загрузка -->
-                    </div>
-                    
-                    <!-- Легенда работ -->
-                    <div class="calendar-legend">
-                        <span class="legend-item spring"><i class="fas fa-square"></i> Весенние работы</span>
-                        <span class="legend-item summer"><i class="fas fa-square"></i> Летние работы</span>
-                        <span class="legend-item autumn"><i class="fas fa-square"></i> Осенние работы</span>
-                        <span class="legend-item winter"><i class="fas fa-square"></i> Зимние работы</span>
-                    </div>
-                    
-                    <!-- Добавление события -->
-                    <button class="btn-add-event" onclick="showAddEventModal()">
-                        <i class="fas fa-plus"></i> Добавить событие
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Достижения -->
+        <!-- Новая секция: Достижения -->
         <section id="achievements">
             <div class="container">
                 <h2 class="section-title">Мои достижения</h2>
@@ -761,94 +907,7 @@
                         <i class="fas fa-star"></i> 1250 очков
                     </div>
                 </div>
-                <div class="achievements-grid" id="achievementsGrid">
-                    <!-- Динамическая загрузка -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция кооперации -->
-        <section id="cooperation">
-            <div class="container">
-                <h2 class="section-title">Кооперация и совместные закупки</h2>
-                
-                <div class="cooperation-tabs">
-                    <button class="tab-btn active" onclick="showCoopTab('offers')">Предложения</button>
-                    <button class="tab-btn" onclick="showCoopTab('requests')">Потребности</button>
-                    <button class="tab-btn" onclick="showCoopTab('joint')">Совместные закупки</button>
-                </div>
-
-                <div class="cooperation-content" id="coopOffers">
-                    <!-- Динамическая загрузка -->
-                </div>
-
-                <button class="btn-add-coop" onclick="showAddCoopModal()">
-                    <i class="fas fa-plus"></i> Создать предложение
-                </button>
-            </div>
-        </section>
-
-        <!-- Распознавание болезней -->
-        <section id="diseaseRecognition">
-            <div class="container">
-                <h2 class="section-title">Распознавание болезней растений</h2>
-                <div class="card recognition-card">
-                    <div class="recognition-upload">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Загрузите фото растения для диагностики</p>
-                        <input type="file" id="plantPhoto" accept="image/*" onchange="identifyDisease(this)">
-                        <button onclick="document.getElementById('plantPhoto').click()" class="btn-upload">
-                            Выбрать фото
-                        </button>
-                    </div>
-                    
-                    <div class="recognition-result" id="recognitionResult" style="display: none;">
-                        <!-- Результат распознавания -->
-                    </div>
-
-                    <div class="recognition-history">
-                        <h4>История диагностики</h4>
-                        <div id="diagnosisHistory">
-                            <!-- Динамическая загрузка -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Виртуальный тур -->
-        <section id="virtualTour">
-            <div class="container">
-                <h2 class="section-title">Виртуальный тур по полям</h2>
-                <div class="tour-grid">
-                    <div class="tour-card" onclick="startVirtualTour('field1')">
-                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80" alt="Поле 1">
-                        <div class="tour-info">
-                            <h4>Поле "Северное"</h4>
-                            <p>Площадь: 120 га</p>
-                            <p>Культура: Пшеница</p>
-                            <span class="tour-badge">360°</span>
-                        </div>
-                    </div>
-                    <div class="tour-card" onclick="startVirtualTour('field2')">
-                        <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=600&q=80" alt="Поле 2">
-                        <div class="tour-info">
-                            <h4>Поле "Придорожное"</h4>
-                            <p>Площадь: 85 га</p>
-                            <p>Культура: Кукуруза</p>
-                            <span class="tour-badge">360°</span>
-                        </div>
-                    </div>
-                    <div class="tour-card" onclick="startVirtualTour('farm')">
-                        <img src="https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?auto=format&fit=crop&w=600&q=80" alt="Ферма">
-                        <div class="tour-info">
-                            <h4>Животноводческий комплекс</h4>
-                            <p>КРС: 500 голов</p>
-                            <p>Производство молока</p>
-                            <span class="tour-badge">3D</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="achievements-grid" id="achievementsGrid"></div>
             </div>
         </section>
     </main>
@@ -864,11 +923,7 @@
             <div class="chat-messages" id="chatMessages">
                 <div class="message bot">
                     <div class="message-content">
-                        Здравствуйте! Я помогу вам с вопросами о сельском хозяйстве. Могу подсказать:
-                        <br>• Нормы высева
-                        <br>• Сроки обработок
-                        <br>• Болезни растений
-                        <br>• Погодные рекомендации
+                        Здравствуйте! Я помогу вам с вопросами о сельском хозяйстве.
                     </div>
                 </div>
             </div>
@@ -923,10 +978,6 @@
                     <input type="email" id="registerEmail" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>Телефон:</label>
-                    <input type="tel" id="registerPhone" class="form-control">
-                </div>
-                <div class="form-group">
                     <label>Пароль:</label>
                     <input type="password" id="registerPassword" class="form-control" required>
                 </div>
@@ -934,50 +985,12 @@
                     <label>Подтверждение:</label>
                     <input type="password" id="registerConfirm" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="agreeTerms" required>
-                        Я согласен с условиями использования
-                    </label>
-                </div>
                 <button type="submit" class="btn-primary">Зарегистрироваться</button>
             </form>
         </div>
     </div>
 
-    <!-- Модальное окно добавления компании -->
-    <div class="modal" id="addCompanyModal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('addCompanyModal')">&times;</span>
-            <h2>Добавить предприятие</h2>
-            <form onsubmit="addCompany(event)">
-                <div class="form-group">
-                    <label>Название:</label>
-                    <input type="text" id="companyName" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Специализация:</label>
-                    <input type="text" id="companySpecialization" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Площадь (га):</label>
-                    <input type="number" id="companyArea" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label>Тип почв:</label>
-                    <select id="companySoil" class="form-control">
-                        <option value="sod-podzol">Дерново-подзолистые</option>
-                        <option value="gray-forest">Серые лесные</option>
-                        <option value="peat">Торфяно-болотные</option>
-                        <option value="chernozem">Черноземы</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-primary">Добавить</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Модальное окно добавления товара -->
+    <!-- Новое модальное окно: Добавление товара -->
     <div class="modal" id="addProductModal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('addProductModal')">&times;</span>
@@ -1036,7 +1049,6 @@
                         <a href="#"><i class="fab fa-telegram"></i></a>
                         <a href="#"><i class="fab fa-youtube"></i></a>
                         <a href="#"><i class="fab fa-odnoklassniki"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 
@@ -1049,21 +1061,18 @@
                         <li><a href="#production">Производство</a></li>
                         <li><a href="#ecology">Экология</a></li>
                         <li><a href="#analytics">Аналитика</a></li>
-                        <li><a href="#weather">Погода</a></li>
-                        <li><a href="#marketplace">Маркетплейс</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Инструменты</h4>
                     <ul>
-                        <li><a href="#calculators">Калькуляторы</a></li>
+                        <li><a href="#calculator">Калькулятор</a></li>
                         <li><a href="#prices">Рыночные цены</a></li>
-                        <li><a href="#workCalendar">Календарь</a></li>
                         <li><a href="#knowledge">База знаний</a></li>
                         <li><a href="#forum">Форум</a></li>
-                        <li><a href="#cooperation">Кооперация</a></li>
-                        <li><a href="#diseaseRecognition">Диагностика</a></li>
+                        <li><a href="#weather">Погода</a></li>
+                        <li><a href="#marketplace">Маркетплейс</a></li>
                     </ul>
                 </div>
                 
@@ -1071,8 +1080,7 @@
                     <h4>Контакты</h4>
                     <p><i class="fas fa-envelope"></i> info@agrobryansk.ru</p>
                     <p><i class="fas fa-phone"></i> +7 (4832) 00-00-00</p>
-                    <p><i class="fas fa-map-marker-alt"></i> г. Брянск, ул. Ленина, 1</p>
-                    <p><i class="fas fa-clock"></i> Пн-Пт: 9:00 - 18:00</p>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Брянск</p>
                 </div>
             </div>
             
@@ -1082,8 +1090,7 @@
                     Источники: 
                     <a href="https://bryansk.gks.ru" target="_blank">Брянскстат</a> |
                     <a href="https://www.mcx32.ru" target="_blank">Минсельхоз</a> |
-                    <a href="https://agro.bryanskobl.ru" target="_blank">Департамент АПК</a> |
-                    <a href="https://meteoinfo.ru" target="_blank">Гидрометцентр</a>
+                    <a href="https://agro.bryanskobl.ru" target="_blank">Департамент АПК</a>
                 </p>
             </div>
         </div>
