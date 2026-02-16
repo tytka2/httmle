@@ -36,7 +36,24 @@ document.addEventListener('DOMContentLoaded', function() {
     initCooperation();
     loadDiagnosisHistory();
     initAchievements();
+    checkMobileMenu();
 });
+
+// ========== МОБИЛЬНОЕ МЕНЮ ==========
+function toggleMobileMenu() {
+    const nav = document.getElementById('mainNav');
+    nav.classList.toggle('show');
+    document.body.classList.toggle('menu-open');
+}
+
+function checkMobileMenu() {
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 992) {
+            document.getElementById('mainNav').classList.remove('show');
+            document.body.classList.remove('menu-open');
+        }
+    });
+}
 
 // ========== ТЕМА ==========
 function initTheme() {
@@ -1892,6 +1909,9 @@ function initSmoothScroll() {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 targetElement.scrollIntoView({ behavior: 'smooth' });
+                // Закрываем мобильное меню после клика
+                document.getElementById('mainNav').classList.remove('show');
+                document.body.classList.remove('menu-open');
             }
         });
     });
@@ -1995,3 +2015,4 @@ window.startVirtualTour = startVirtualTour;
 window.compareCrops = compareCrops;
 window.searchKnowledge = searchKnowledge;
 window.shareMarker = shareMarker;
+window.toggleMobileMenu = toggleMobileMenu;
