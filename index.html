@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Агропортал Брянской области</title>
+  <meta name="description" content="Агропортал Брянской области: предприятия, погода, форум, маркетплейс, кооперация, база знаний и аналитика." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header glass">
+    <div class="container header-inner">
+      <a href="#hero" class="brand">
+        <div class="brand-badge"><i class="fa-solid fa-seedling"></i></div>
+        <div>
+          <strong>АгроБрянск</strong>
+          <span>цифровая платформа региона</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="#companies">Компании</a>
+        <a href="#comparison">Сравнение</a>
+        <a href="#analytics">Аналитика</a>
+        <a href="#weather">Погода</a>
+        <a href="#forum">Форум</a>
+        <a href="#marketplace">Маркетплейс</a>
+        <a href="#cooperation">Кооперация</a>
+        <a href="#knowledge">База знаний</a>
+        <a href="#operators">Операторы</a>
+        <a href="bbc.html">Новости</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Переключить тему"><i class="fa-solid fa-moon"></i></button>
+        <button class="icon-btn mobile-only" id="mobileNavBtn" aria-label="Меню"><i class="fa-solid fa-bars"></i></button>
+        <button class="primary-btn" id="authOpenBtn"><i class="fa-solid fa-user"></i><span id="authButtonText">Войти</span></button>
+        <button class="secondary-btn hidden" id="headerLogoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Выйти</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Для сельхозпредприятий, фермеров и кооперации</span>
+          <h1>Агропортал Брянской области с общими данными, погодой, аналитикой и коммуникацией</h1>
+          <p class="hero-text">Сайт оставляет логику исходной структуры, но переводит ключевые разделы в удобный формат для GitHub Pages: фронтенд на статике и общие данные через Supabase.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#companies">Смотреть компании</a>
+            <a class="secondary-btn" href="#weather">Полевой прогноз</a>
+          </div>
+          <div class="hero-stats" id="heroStats"></div>
+          <article class="news-promo glass">
+            <div class="badge-row"><span class="badge">Новый раздел</span><span class="tag">Новости и мероприятия</span></div>
+            <h3>У платформы есть отдельный новостной сайт</h3>
+            <p>Следите за новостями, архивом, популярными публикациями, мероприятиями и рекламными размещениями в отдельном разделе платформы.</p>
+            <div class="card-actions"><a class="primary-btn" href="bbc.html"><i class="fa-solid fa-newspaper"></i> Открыть новостной сайт</a></div>
+          </article>
+        </div>
+        <div class="hero-side glass">
+          <div class="status-chip"><i class="fa-solid fa-wifi"></i> <span id="syncStatus">Проверка подключения…</span></div>
+          <div class="account-card" id="accountCard"></div>
+          <div class="quick-actions">
+            <a class="quick-btn" href="https://doctorp.ru/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-leaf"></i> Распознавание болезней</a>
+            <button class="quick-btn" data-open-modal="marketplaceModal"><i class="fa-solid fa-plus"></i> Добавить товар</button>
+            <button class="quick-btn" data-open-modal="coopModal"><i class="fa-solid fa-handshake-angle"></i> Добавить кооперацию</button>
+            <button class="quick-btn" data-open-modal="forumModal"><i class="fa-solid fa-comments"></i> Создать тему</button>
+            <button class="quick-btn" data-open-modal="markerModal"><i class="fa-solid fa-location-dot"></i> Добавить метку</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="rankings">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Рейтинги</span>
+            <h2>Рейтинг пользователей и компаний</h2>
+          </div>
+          <div class="toolbar small-note">Автообновление в демо-режиме и при подключении общей базы</div>
+        </div>
+        <div class="ranking-grid">
+          <article class="glass card-block rating-users-panel">
+            <button class="marker-scroll-btn marker-scroll-up rating-scroll-btn" type="button" data-user-rating-scroll="up" aria-label="Прокрутить рейтинг пользователей вверх">
+              <i class="fa-solid fa-chevron-up"></i>
+            </button>
+            <h3>Топ пользователей по очкам</h3>
+            <div id="userRating" class="simple-list user-rating-list"></div>
+            <button class="marker-scroll-btn marker-scroll-down rating-scroll-btn" type="button" data-user-rating-scroll="down" aria-label="Прокрутить рейтинг пользователей вниз">
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          </article>
+          <article class="glass card-block">
+            <h3>Рейтинг компаний</h3>
+            <div class="carousel-shell compact-shell">
+              <button class="scroll-btn left" data-scroll-target="companyRatingRail"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="horizontal-rail company-rating-rail" id="companyRatingRail"></div>
+              <button class="scroll-btn right" data-scroll-target="companyRatingRail"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="small-note">Лента автоматически сдвигается влево и вправо, чтобы занимать меньше места на странице.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="companies">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Карточки компаний</span>
+            <h2>Компании и предприятия Брянской области</h2>
+          </div>
+          <div class="toolbar">
+            <input type="search" id="companySearch" class="search-input" placeholder="Поиск компании или специализации" />
+          </div>
+        </div>
+        <div class="carousel-shell">
+          <button class="scroll-btn left" data-scroll-target="companyGrid"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="horizontal-rail company-rail" id="companyGrid"></div>
+          <button class="scroll-btn right" data-scroll-target="companyGrid"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="comparison">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Автозаполнение</span>
+            <h2>Сравнение предприятий</h2>
+          </div>
+          <div class="toolbar">
+            <select id="comparisonFilter" class="select-input">
+              <option value="all">Все специализации</option>
+            </select>
+          </div>
+        </div>
+        <div class="carousel-shell">
+          <button class="scroll-btn left" data-scroll-target="comparisonRail"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="horizontal-rail" id="comparisonRail"></div>
+          <button class="scroll-btn right" data-scroll-target="comparisonRail"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="analytics">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Автоаналитика</span>
+            <h2>Аналитика и региональные тренды</h2>
+          </div>
+        </div>
+        <div class="analytics-grid">
+          <article class="glass card-block">
+            <h3>Ключевые показатели аграрного сектора Брянской области</h3>
+            <div class="metrics-grid" id="analyticsMetrics"></div>
+          </article>
+          <article class="glass card-block">
+            <h3>Динамика направлений</h3>
+            <div class="chart-wrap"><canvas id="productionChart"></canvas></div>
+          </article>
+          <article class="glass card-block">
+            <h3>Структура продукции и специализаций предприятий</h3>
+            <p class="small-note">В диаграмме показана официальная структура продукции сельского хозяйства Брянской области по видам производства.</p>
+            <div class="chart-wrap"><canvas id="enterpriseChart"></canvas></div>
+          </article>
+          <article class="glass card-block">
+            <h3>Рыночные сигналы</h3>
+            <div class="insight-list" id="analyticsInsights"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="weather">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Онлайн-погода</span>
+            <h2>Погода по Брянской области, прогноз для полевых работ и агрометеорология</h2>
+          </div>
+          <div class="toolbar weather-toolbar">
+            <select id="districtSelect" class="select-input"></select>
+            <button class="secondary-btn" id="refreshWeatherBtn"><i class="fa-solid fa-rotate"></i> Обновить</button>
+          </div>
+        </div>
+        <div class="weather-grid">
+          <article class="glass card-block">
+            <h3>Сводка по выбранному району</h3>
+            <div id="weatherCurrent" class="weather-current"></div>
+          </article>
+          <article class="glass card-block">
+            <h3>Прогноз для полевых работ</h3>
+            <div id="fieldWorkForecast" class="forecast-list"></div>
+          </article>
+          <article class="glass card-block">
+            <h3>Агрометеорология</h3>
+            <div id="agroWeatherBlock" class="agro-list"></div>
+          </article>
+          <article class="glass card-block wide">
+            <h3>Погода по районам области</h3>
+            <div class="carousel-shell compact-shell">
+              <button class="scroll-btn left" data-scroll-target="districtWeatherGrid"><i class="fa-solid fa-chevron-left"></i></button>
+              <div class="horizontal-rail district-weather-rail" id="districtWeatherGrid"></div>
+              <button class="scroll-btn right" data-scroll-target="districtWeatherGrid"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="prices">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Автообновление</span>
+            <h2>Рыночные цены</h2>
+          </div>
+          <div class="toolbar small-note" id="pricesSourceNote"></div>
+        </div>
+        <div class="carousel-shell">
+          <button class="scroll-btn left" data-scroll-target="priceGrid"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="horizontal-rail price-rail" id="priceGrid"></div>
+          <button class="scroll-btn right" data-scroll-target="priceGrid"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="forum">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Общий форум</span>
+            <h2>Форум аграриев</h2>
+          </div>
+          <div class="toolbar">
+            <button class="primary-btn" data-open-modal="forumModal"><i class="fa-solid fa-pen"></i> Новая тема</button>
+          </div>
+        </div>
+        <div class="forum-layout">
+          <div class="glass card-block">
+            <h3>Темы</h3>
+            <div id="forumTopics" class="forum-list"></div>
+          </div>
+          <div class="glass card-block">
+            <h3>Обсуждение</h3>
+            <div id="forumThread" class="forum-thread empty-state">Выберите тему, чтобы открыть обсуждение.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="marketplace">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Общий каталог</span>
+            <h2>Маркетплейс</h2>
+          </div>
+          <div class="toolbar">
+            <button class="primary-btn" data-open-modal="marketplaceModal"><i class="fa-solid fa-plus"></i> Добавить товар</button>
+          </div>
+        </div>
+        <div class="carousel-shell">
+          <button class="scroll-btn left" data-scroll-target="marketplaceRail"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="horizontal-rail" id="marketplaceRail"></div>
+          <button class="scroll-btn right" data-scroll-target="marketplaceRail"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="cooperation">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Совместные закупки</span>
+            <h2>Кооперация и совместные закупки</h2>
+          </div>
+          <div class="toolbar">
+            <button class="primary-btn" data-open-modal="coopModal"><i class="fa-solid fa-plus"></i> Добавить карточку</button>
+          </div>
+        </div>
+        <div class="carousel-shell">
+          <button class="scroll-btn left" data-scroll-target="coopRail"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="horizontal-rail" id="coopRail"></div>
+          <button class="scroll-btn right" data-scroll-target="coopRail"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mapSection">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Общие метки</span>
+            <h2>Карта наблюдений и объектов</h2>
+          </div>
+          <div class="toolbar">
+            <button class="secondary-btn" data-open-modal="markerModal"><i class="fa-solid fa-location-dot"></i> Добавить метку</button>
+          </div>
+        </div>
+        <div class="map-layout">
+          <div class="glass map-card">
+            <div id="map"></div>
+          </div>
+          <div class="glass card-block marker-panel">
+            <button class="marker-scroll-btn marker-scroll-up" type="button" data-marker-scroll="up" aria-label="Прокрутить метки вверх">
+              <i class="fa-solid fa-chevron-up"></i>
+            </button>
+            <h3>Последние метки</h3>
+            <div id="markerList" class="simple-list"></div>
+            <button class="marker-scroll-btn marker-scroll-down" type="button" data-marker-scroll="down" aria-label="Прокрутить метки вниз">
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="knowledge">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Расширенная база</span>
+            <h2>База знаний</h2>
+          </div>
+          <div class="toolbar">
+            <input type="search" id="knowledgeSearch" class="search-input" placeholder="Найти по базе знаний" />
+          </div>
+        </div>
+        <div class="carousel-shell">
+          <button class="scroll-btn left" data-scroll-target="knowledgeGrid"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="horizontal-rail knowledge-rail" id="knowledgeGrid"></div>
+          <button class="scroll-btn right" data-scroll-target="knowledgeGrid"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="operators">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-kicker">Обратная связь</span>
+            <h2>Связь с операторами</h2>
+          </div>
+        </div>
+        <div class="operators-grid">
+          <article class="glass card-block">
+            <h3>Написать оператору</h3>
+            <p class="small-note">Обращение приватное: его видите только вы и администратор.</p>
+            <form id="operatorForm" class="stack-form">
+              <input class="text-input" name="subject" placeholder="Тема обращения" required />
+              <textarea class="text-input" name="message" rows="5" placeholder="Опишите вопрос" required></textarea>
+              <button class="primary-btn" type="submit">Отправить</button>
+            </form>
+          </article>
+          <article class="glass card-block">
+            <h3>Входящие обращения</h3>
+            <div id="operatorInbox" class="simple-list"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="chat-toggle" id="chatToggle"><i class="fa-solid fa-robot"></i></button>
+  <aside class="chatbot glass" id="chatbot">
+    <div class="chatbot-head">
+      <div>
+        <strong>Агро-бот</strong>
+        <span>цены, погода, помощь и база знаний</span>
+      </div>
+      <button class="icon-btn small" id="chatClose"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="chat-log" id="chatLog"></div>
+    <form id="chatForm" class="chat-form">
+      <input id="chatInput" class="text-input" placeholder="Спросите про погоду, цены, форум, помощь…" />
+      <button class="primary-btn" type="submit">Отправить</button>
+    </form>
+  </aside>
+
+  <div class="modal" id="authModal">
+    <div class="modal-card glass">
+      <button class="modal-close" data-close-modal="authModal">×</button>
+      <h3>Аккаунт</h3>
+      <div class="tabs">
+        <button class="tab active" data-auth-tab="login">Вход</button>
+        <button class="tab" data-auth-tab="signup">Регистрация</button>
+      </div>
+      <form id="loginForm" class="stack-form auth-form active">
+        <input class="text-input" name="email" type="email" placeholder="Email" required />
+        <input class="text-input" name="password" type="password" placeholder="Пароль" required />
+        <button class="primary-btn" type="submit">Войти</button>
+      </form>
+      <form id="signupForm" class="stack-form auth-form">
+        <input class="text-input" name="full_name" placeholder="Ваше имя" required />
+        <input class="text-input" name="email" type="email" placeholder="Email" required />
+        <input class="text-input" name="password" id="signupPassword" type="password" placeholder="Пароль" minlength="10" required />
+        <div class="password-meter"><div id="passwordMeterBar"></div></div>
+        <div class="small-note" id="passwordHint">Минимум 10 символов, буквы в разном регистре, цифры и спецсимвол.</div>
+        <button class="primary-btn" type="submit">Создать аккаунт</button>
+      </form>
+      <div class="security-note">
+        <strong>Защита аккаунта</strong>
+        <ul>
+          <li>усиленные требования к паролю при регистрации;</li>
+          <li>выход из аккаунта одной кнопкой в шапке и в кабинете;</li>
+          <li>приватные обращения видны только автору и администратору.</li>
+        </ul>
+      </div>
+      <div class="small-note">Главный аккаунт администратора: <strong>agrobransk@inbox.ru</strong></div>
+    </div>
+  </div>
+
+  <div class="modal" id="forumModal">
+    <div class="modal-card glass">
+      <button class="modal-close" data-close-modal="forumModal">×</button>
+      <h3>Новая тема</h3>
+      <form id="forumForm" class="stack-form">
+        <input class="text-input" name="title" placeholder="Название темы" required />
+        <textarea class="text-input" name="body" rows="6" placeholder="Текст сообщения" required></textarea>
+        <button class="primary-btn" type="submit">Опубликовать</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="marketplaceModal">
+    <div class="modal-card glass">
+      <button class="modal-close" data-close-modal="marketplaceModal">×</button>
+      <h3>Добавить товар</h3>
+      <form id="marketplaceForm" class="stack-form">
+        <input class="text-input" name="title" placeholder="Название товара" required />
+        <select class="select-input" name="category" required>
+          <option value="Семена">Семена</option>
+          <option value="Удобрения">Удобрения</option>
+          <option value="Техника">Техника</option>
+          <option value="Урожай">Урожай</option>
+          <option value="Услуги">Услуги</option>
+        </select>
+        <div class="two-cols">
+          <input class="text-input" name="price" type="number" step="0.01" placeholder="Цена" required />
+          <input class="text-input" name="unit" placeholder="Единица (кг, т, га)" required />
+        </div>
+        <input class="text-input" name="phone" placeholder="Телефон" required />
+        <input class="text-input" name="image_url" placeholder="Ссылка на фото (необязательно)" />
+        <textarea class="text-input" name="description" rows="5" placeholder="Описание" required></textarea>
+        <button class="primary-btn" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="coopModal">
+    <div class="modal-card glass">
+      <button class="modal-close" data-close-modal="coopModal">×</button>
+      <h3>Добавить карточку кооперации</h3>
+      <form id="coopForm" class="stack-form">
+        <select class="select-input" name="type" required>
+          <option value="Совместная закупка">Совместная закупка</option>
+          <option value="Запрос партнера">Запрос партнера</option>
+          <option value="Совместная техника">Совместная техника</option>
+        </select>
+        <input class="text-input" name="title" placeholder="Заголовок" required />
+        <input class="text-input" name="contact" placeholder="Контакт" required />
+        <div class="two-cols">
+          <input class="text-input" name="quantity_needed" placeholder="Объем / количество" required />
+          <input class="text-input" name="price" placeholder="Бюджет / ориентир" required />
+        </div>
+        <textarea class="text-input" name="description" rows="5" placeholder="Описание" required></textarea>
+        <button class="primary-btn" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="markerModal">
+    <div class="modal-card glass">
+      <button class="modal-close" data-close-modal="markerModal">×</button>
+      <h3>Добавить метку</h3>
+      <form id="markerForm" class="stack-form">
+        <input class="text-input" name="title" placeholder="Название метки" required />
+        <select class="select-input" name="type" required>
+          <option value="Наблюдение">Наблюдение</option>
+          <option value="Проблема">Проблема</option>
+          <option value="Проба почвы">Проба почвы</option>
+          <option value="Техника">Техника</option>
+        </select>
+        <div class="two-cols">
+          <input class="text-input" name="lat" type="number" step="0.000001" placeholder="Широта" required />
+          <input class="text-input" name="lng" type="number" step="0.000001" placeholder="Долгота" required />
+        </div>
+        <textarea class="text-input" name="description" rows="5" placeholder="Описание" required></textarea>
+        <button class="primary-btn" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

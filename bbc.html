@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Новости и мероприятия — АгроБрянск</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6b8e23">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body class="light-theme">
+    <!-- Шапка сайта - фиксированная -->
+    <header class="site-header glass news-header">
+        <div class="container header-inner">
+            <a href="index.html#hero" class="brand news-brand">
+                <div class="brand-badge"><i class="fas fa-newspaper"></i></div>
+                <div><strong>Новости и мероприятия</strong><span>раздел новостей АгроБрянск</span></div>
+            </a>
+
+            <nav class="main-nav news-main-nav" id="navContainer">
+                <a href="#news">Новости</a>
+                <a href="#events">Мероприятия</a>
+                <a href="#popular">Популярное</a>
+                <a href="#archive">Архив</a>
+                <a href="#contact">Контакты</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="index.html" class="secondary-btn"><i class="fas fa-home"></i> На главную</a>
+                <button class="icon-btn" id="themeToggle" aria-label="Переключить тему">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="icon-btn mobile-only" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Меню">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Уведомления -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Поисковая строка -->
+    <div class="search-section">
+        <div class="container">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="Поиск новостей и мероприятий..." onkeyup="handleSearch(event)">
+                <button onclick="searchNews()"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Категории -->
+    <div class="categories-section">
+        <div class="container">
+            <div class="categories-wrapper" id="categories">
+                <button class="category-btn active" onclick="filterByCategory('all')">Все</button>
+                <button class="category-btn" onclick="filterByCategory('technology')">Технологии</button>
+                <button class="category-btn" onclick="filterByCategory('business')">Бизнес</button>
+                <button class="category-btn" onclick="filterByCategory('science')">Наука</button>
+                <button class="category-btn" onclick="filterByCategory('culture')">Культура</button>
+                <button class="category-btn" onclick="filterByCategory('sports')">Спорт</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- Фильтр по дате -->
+        <div class="date-filter-bar">
+            <label for="dateFilter"><i class="far fa-calendar-alt"></i> Фильтр по дате:</label>
+            <select id="dateFilter" onchange="filterByDate(this.value)">
+                <option value="all">Все время</option>
+                <option value="today">Сегодня</option>
+                <option value="week">Эта неделя</option>
+                <option value="month">Этот месяц</option>
+                <option value="year">Этот год</option>
+            </select>
+        </div>
+
+        <!-- Секция новостей -->
+        <section id="news" class="news-section">
+            <h2 class="section-title">
+                <i class="fas fa-newspaper"></i> Последние новости
+                <span class="section-count" id="newsCount">0</span>
+            </h2>
+            <div class="news-grid" id="news-container">
+                <!-- Новости будут добавляться через JavaScript -->
+            </div>
+            
+            <!-- Пагинация -->
+            <div class="pagination" id="pagination">
+                <button class="page-btn" id="prevPage" onclick="changePage('prev')" disabled>
+                    <i class="fas fa-chevron-left"></i> Предыдущая
+                </button>
+                <div class="page-numbers" id="pageNumbers"></div>
+                <button class="page-btn" id="nextPage" onclick="changePage('next')">
+                    Следующая <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Секция популярных новостей -->
+        <section id="popular" class="popular-section">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i> Популярное
+            </h2>
+            <div class="popular-grid" id="popular-container"></div>
+        </section>
+
+        <!-- Секция мероприятий -->
+        <section id="events" class="events-section">
+            <h2 class="section-title">
+                <i class="fas fa-calendar-alt"></i> Предстоящие мероприятия
+                <span class="section-count" id="eventsCount">0</span>
+            </h2>
+            <div class="events-list" id="events-container">
+                <!-- Мероприятия будут добавляться через JavaScript -->
+            </div>
+        </section>
+
+        <!-- Календарь новостей (архив) -->
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">
+                <i class="fas fa-bullhorn"></i> Обратная связь и размещение рекламы
+            </h2>
+            <div class="feedback-layout">
+                <article class="feedback-card">
+                    <h3>Запрос на размещение рекламы</h3>
+                    <p>До размещения рекламы отправьте заявку: формат, сроки, контакты и желаемую аудиторию. Стоимость размещения — договорная.</p>
+                    <form id="newsFeedbackForm" class="news-feedback-form">
+                        <input type="text" id="feedbackName" placeholder="Ваше имя или компания" required>
+                        <input type="email" id="feedbackEmail" placeholder="Email для ответа" required>
+                        <select id="feedbackTopic">
+                            <option value="Реклама">Реклама</option>
+                            <option value="Партнерство">Партнерство</option>
+                            <option value="Обратная связь">Обратная связь</option>
+                        </select>
+                        <textarea id="feedbackMessage" rows="5" placeholder="Опишите запрос" required></textarea>
+                        <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Отправить заявку</button>
+                    </form>
+                    <p class="feedback-privacy"><i class="fas fa-lock"></i> Сообщение сохраняется приватно и не показывается другим пользователям сайта.</p>
+                </article>
+                <article class="feedback-card">
+                    <h3>Статус приватных обращений</h3>
+                    <div id="privateFeedbackList" class="private-feedback-list"></div>
+                </article>
+            </div>
+        </section>
+
+        <section id="archive" class="archive-section">
+            <h2 class="section-title">
+                <i class="fas fa-archive"></i> Архив новостей
+            </h2>
+            <div class="archive-calendar" id="archiveCalendar"></div>
+        </section>
+
+        <!-- Сохраненные новости -->
+        <section id="saved" class="saved-section" style="display: none;">
+            <h2 class="section-title">
+                <i class="fas fa-bookmark"></i> Сохраненные новости
+                <span class="section-count" id="savedCount">0</span>
+            </h2>
+            <div class="saved-grid" id="saved-container"></div>
+        </section>
+    </main>
+
+    <!-- Кнопка сохраненных новостей -->
+    <button class="saved-news-btn" onclick="toggleSavedSection()" id="savedNewsBtn">
+        <i class="fas fa-bookmark"></i>
+        <span class="saved-badge" id="savedBadge">0</span>
+    </button>
+
+    <!-- Кнопка наверх -->
+    <button class="scroll-top" onclick="scrollToTop()" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Чат-бот -->
+    <div class="chat-bot" id="chatBot">
+        <div class="chat-header" onclick="toggleChat()">
+            <i class="fas fa-robot"></i>
+            <span>Новостной помощник</span>
+            <i class="fas fa-chevron-up" id="chatToggleIcon"></i>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-content">
+                        Привет! Я помогу найти новости или мероприятия. Что вас интересует?
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Введите запрос..." onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для детального просмотра -->
+    <div class="modal" id="newsModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно комментариев -->
+    <div class="modal" id="commentsModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCommentsModal()">&times;</span>
+            <h2><i class="fas fa-comments"></i> Комментарии</h2>
+            <div id="commentsContainer" class="comments-container"></div>
+            <div class="add-comment">
+                <textarea id="commentText" placeholder="Ваш комментарий..." rows="3"></textarea>
+                <button onclick="addComment()" class="btn-primary">Отправить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал сайта -->
+    <footer class="site-footer news-footer news-footer-accent">
+        <div class="container footer-grid">
+            <div>
+                <h3>Новости и мероприятия</h3>
+                <p>Сайт создал Мартышев Ярослав.</p>
+            </div>
+            <div>
+                <h4>Источники данных</h4>
+                <p>Главная страница АгроБрянск, Open-Meteo, Supabase, Правительство Брянской области, ФГБУ «Центр Агроаналитики», локальная новостная база страницы и подключаемые источники владельца сайта.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script1.js"></script>
+</body>
+</html>
